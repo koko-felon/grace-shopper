@@ -1,0 +1,50 @@
+{
+  "name": "starting_code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "npm run build",
+    "start": "per-env",
+    "start:development": "nodemon src/express/server.js & react-scripts start",
+    "start:production": "node src/express/server.js",
+    "build": "react-scripts build",
+    "test": "react-scripts test --coverage",
+    "seed": "node src/express/db/seed.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.15.1",
+    "@testing-library/react": "^12.1.2",
+    "axios": "^0.24.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "per-env": "^1.0.2",
+    "pg": "^8.7.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^6.0.2",
+    "react-scripts": "^4.0.3"
+  },
+  "devDependencies": {
+    "msw": "^0.35.0",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.1.6"
+  },
+  "proxy": "http://localhost:5000",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
