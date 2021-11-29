@@ -15,6 +15,7 @@ This is set up to run on a proxy, so that you can make calls back to your api wi
 Once both servers are running, you can start developing... the server restarts thanks to nodemon, and the client restarts thanks to react-scripts.
 Project Structure
 
+```bash
 .
 ├── README.md
 ├── package-lock.json
@@ -42,6 +43,7 @@ Project Structure
 │ └── server.js
 ├── index.jsx
 └── setupTests.js
+```
 
 All of the source code for this full stack application is inside of src.
 The Express Server
