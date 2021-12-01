@@ -5,7 +5,7 @@ const {
 } = require("./index");
 
 //This is Tri!
-
+// Hi this is Jessica
 async function rebuildDB() {
   try {
     await client.query(/*sql*/ `
