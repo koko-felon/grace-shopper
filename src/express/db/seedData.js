@@ -148,6 +148,15 @@ async function rebuildDB() {
 
 async function seedData() {
   try {
+    await usersData();
+    await paymentsData();
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function usersData() {
+  try {
     const users = [
       {
         email: "testuser",
@@ -192,7 +201,6 @@ async function seedData() {
         ]
       );
     }
-    await paymentsData();
   } catch (error) {
     throw error;
   }
