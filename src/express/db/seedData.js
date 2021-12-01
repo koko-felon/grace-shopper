@@ -150,11 +150,14 @@ async function seedData() {
   try {
     await usersData();
     await paymentsData();
+    await addressesData();
+    await categoriesData();
   } catch (error) {
     throw error;
   }
 }
 
+// Functions to test all data for seedData
 async function usersData() {
   try {
     const users = [
@@ -201,10 +204,14 @@ async function usersData() {
         ]
       );
     }
+
+    console.log("Inserted usersData!");
   } catch (error) {
+    console.error("Error running usersData :(");
     throw error;
   }
 }
+
 async function paymentsData() {
   try {
     const paymentsData = [
@@ -259,7 +266,95 @@ async function paymentsData() {
         ]
       );
     }
+    console.log("Inserted paymentsData!");
   } catch (error) {
+    console.error("Error running paymentsData :(");
+    throw error;
+  }
+}
+
+async function addressesData() {
+  try {
+    const addresses = [
+      {
+        userId: 1,
+        address: "1234 Main Street",
+        city: "Mandeville",
+        state: "LA",
+        postalCode: 70448,
+      },
+      {
+        userId: 2,
+        address: "333 Prairie Street",
+        city: "Prairieville",
+        state: "LA",
+        postalCode: 32448,
+      },
+      {
+        userId: 3,
+        address: "3636 John Doe Street",
+        city: "New York",
+        state: "NY",
+        postalCode: 73254,
+      },
+    ];
+
+    for (const address of addresses) {
+      await client.query(
+        `
+      INSERT INTO addresses
+      ("userId", address, city, state, "postalCode")
+      VALUES ($1, $2, $3, $4, $5);
+    `,
+        [
+          address.userId,
+          address.address,
+          address.city,
+          address.state,
+          address.postalCode,
+        ]
+      );
+    }
+    console.log("Inserted addressesData!");
+  } catch (error) {
+    console.error("Error running addressesData :(");
+    throw error;
+  }
+}
+
+async function categoriesData() {
+  try {
+    const categories = [
+      {
+        name: "Art",
+        description: "Art on all things Coco!",
+        image: "http://somelink.fakeurl",
+      },
+      {
+        name: "Food/Drink",
+        description: "Get steals on all your Coco groceries!",
+        image: "http://somelink.fakeurl",
+      },
+      {
+        name: "Apparel",
+        description: "Coco apparel to fit all styles!",
+        image: "http://somelink.fakeurl",
+      },
+    ];
+
+    for (const category of categories) {
+      await client.query(
+        `
+      INSERT INTO categories
+      (name, description, image)
+      VALUES ($1, $2, $3);
+    `,
+        [category.name, category.description, category.image]
+      );
+    }
+    console.log("Inserted categoriesData!");
+  } catch (error) {
+    console.error("Error running categoriesData :(");
     throw error;
   }
 }
