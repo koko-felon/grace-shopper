@@ -46,12 +46,14 @@ async function createTables() {
     await client.query(`
     CREATE TABLE payments (
        id SERIAL PRIMARY KEY,
-       "creditCardNumber" INTEGER UNIQUE NOT NULL,
+       "creditCardNumber" varchar(16) NOT NULL,
       "cardExp" INTEGER NOT NULL,
+       cvv INTEGER NOT NULL,
        "billingAddress" varchar(255) NOT NULL,
        "billingCity" varchar(255) NOT NULL,
+       "billingState" varchar(255) NOT NULL,
       "billingPostalCode" INTEGER NOT NULL,
-      "isDefault" BOOLEAN DEFAULT false
+      "isDefault" BOOLEAN DEFAULT true
     );`);
 
     console.log("Created Table payments!");
@@ -187,6 +189,65 @@ async function seedData() {
           user.firstName,
           user.lastName,
           user.isAdmin,
+        ]
+      );
+    }
+    await paymentsData();
+  } catch (error) {
+    throw error;
+  }
+}
+async function paymentsData() {
+  try {
+    const paymentsData = [
+      {
+        creditCardNumber: "1234567890000000",
+        cardExp: 1212,
+        cvv: 123,
+        billingAddress: "1234 Main Street",
+        billingCity: "Mandeville",
+        billingState: "LA",
+        billingPostalCode: 70448,
+        isDefault: true,
+      },
+      {
+        creditCardNumber: "1234567890000001",
+        cardExp: 1213,
+        cvv: 234,
+        billingAddress: "607 A Street",
+        billingCity: "Austin",
+        billingState: "TX",
+        billingPostalCode: 78727,
+        isDefault: true,
+      },
+      {
+        creditCardNumber: "1234567890000002",
+        cardExp: 1214,
+        cvv: 345,
+        billingAddress: "1234 Easy Street",
+        billingCity: "New Orleans",
+        billingState: "LA",
+        billingPostalCode: 70112,
+        isDefault: true,
+      },
+    ];
+
+    for (const payment of paymentsData) {
+      await client.query(
+        `
+      INSERT INTO payments
+      ("creditCardNumber", "cardExp", cvv, "billingAddress", "billingCity", "billingState","billingPostalCode", "isDefault")
+      VALUES ($1, $2, $3, $4, $5, $6, $7,$8);
+    `,
+        [
+          payment.creditCardNumber,
+          payment.cardExp,
+          payment.cvv,
+          payment.billingAddress,
+          payment.billingCity,
+          payment.billingState,
+          payment.billingPostalCode,
+          payment.isDefault,
         ]
       );
     }
