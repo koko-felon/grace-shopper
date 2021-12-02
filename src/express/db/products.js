@@ -35,15 +35,13 @@ async function createProduct({
 }
 
 async function getProducts() {
-  const {
-    rows: [product],
-  } = await client.query(
+  const { rows } = await client.query(
     `
         SELECT * FROM products;
     `
   );
 
-  return [product];
+  return rows;
 }
 
 async function getProductById(productId) {
