@@ -1,4 +1,6 @@
 const client = require("./client");
+const bcrypt = require("bcryptjs");
+const SALT_COUNT = 10;
 
 async function createUser({
   email,
@@ -7,6 +9,8 @@ async function createUser({
   firstName,
   lastName,
 }) {
+  const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
+
   const {
     rows: [user],
   } = await client.query(
@@ -16,9 +20,29 @@ async function createUser({
     ON CONFLICT (email) DO NOTHING
     RETURNING *;
     `,
-    [email, phoneNumber, password, firstName, lastName]
+    [email, phoneNumber, hashedPassword, firstName, lastName]
   );
 
+  delete user.password;
+  return user;
+}
+
+async function getUser({ email, password }) {
+  const {
+    rows: [user],
+  } = await client.query(
+    `
+  SELECT * FROM users
+  WHERE email = $1
+  `,
+    [email]
+  );
+
+  const hashedPassword = user.password;
+  const passwordsMatch = await bcrypt.compare(password, hashedPassword);
+  if (passwordsMatch === false) {
+    return;
+  }
   delete user.password;
   return user;
 }
@@ -31,6 +55,19 @@ async function getUserById(userId) {
     SELECT * FROM users WHERE id = $1
     `,
     [userId]
+  );
+  delete user.password;
+  return user;
+}
+
+async function getUserByEmail(email) {
+  const {
+    rows: [user],
+  } = await client.query(
+    `
+      SELECT * FROM users WHERE email = $1
+      `,
+    [email]
   );
   delete user.password;
   return user;
@@ -73,4 +110,11 @@ async function deleteUser(userId) {
   return user;
 }
 
-module.exports(createUser, getUserById, updateUser, deleteUser);
+module.exports(
+  createUser,
+  getUser,
+  getUserById,
+  getUserByEmail,
+  updateUser,
+  deleteUser
+);
