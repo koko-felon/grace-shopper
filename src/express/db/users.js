@@ -60,19 +60,6 @@ async function getUserById(userId) {
   return user;
 }
 
-async function getUserByEmail(email) {
-  const {
-    rows: [user],
-  } = await client.query(
-    `
-      SELECT * FROM users WHERE email = $1
-      `,
-    [email]
-  );
-  delete user.password;
-  return user;
-}
-
 async function updateUser({ id, ...fields }) {
   const fieldNames = Object.keys(fields);
 
@@ -110,11 +97,4 @@ async function deleteUser(userId) {
   return user;
 }
 
-module.exports(
-  createUser,
-  getUser,
-  getUserById,
-  getUserByEmail,
-  updateUser,
-  deleteUser
-);
+module.exports(createUser, getUser, getUserById, updateUser, deleteUser);
