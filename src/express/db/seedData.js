@@ -46,6 +46,8 @@ async function createTables() {
     await client.query(`
     CREATE TABLE payments (
        id SERIAL PRIMARY KEY,
+       "userId" INTEGER REFERENCES users(id),
+       "paymentId" INTEGER REFERENCES payments(id),
        "creditCardNumber" varchar(16) NOT NULL,
       "cardExp" INTEGER NOT NULL,
        cvv INTEGER NOT NULL,
@@ -222,6 +224,8 @@ async function paymentsData() {
   try {
     const paymentsData = [
       {
+        userId: 1,
+        paymentId: 1,
         creditCardNumber: "1234567890000000",
         cardExp: 1212,
         cvv: 123,
@@ -232,6 +236,8 @@ async function paymentsData() {
         isDefault: true,
       },
       {
+        userId: 2,
+        paymentId: 2,
         creditCardNumber: "1234567890000001",
         cardExp: 1213,
         cvv: 234,
@@ -242,6 +248,8 @@ async function paymentsData() {
         isDefault: true,
       },
       {
+        userId: 3,
+        paymentId: 3,
         creditCardNumber: "1234567890000002",
         cardExp: 1214,
         cvv: 345,
@@ -257,10 +265,12 @@ async function paymentsData() {
       await client.query(
         `
       INSERT INTO payments
-      ("creditCardNumber", "cardExp", cvv, "billingAddress", "billingCity", "billingState","billingPostalCode", "isDefault")
-      VALUES ($1, $2, $3, $4, $5, $6, $7,$8);
+      ("userId", "paymentId", "creditCardNumber", "cardExp", cvv, "billingAddress", "billingCity", "billingState","billingPostalCode", "isDefault")
+      VALUES ($1, $2, $3, $4, $5, $6, $7,$8, $9, $10);
     `,
         [
+          payment.userId,
+          payment.paymentId,
           payment.creditCardNumber,
           payment.cardExp,
           payment.cvv,
