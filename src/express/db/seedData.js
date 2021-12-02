@@ -84,13 +84,13 @@ async function createTables() {
     CREATE TABLE products(
       id SERIAL PRIMARY KEY,
       "categoryId" INTEGER REFERENCES categories(id),
-      SKU INTEGER NOT NULL,
+      "SKU" INTEGER NOT NULL,
       "productName" varchar(255) NOT NULL,
       "productDescription" varchar(255) NOT NULL,
       "currentPrice" INTEGER NOT NULL,
       "productQuantity" INTEGER NOT NULL,
       discount INTEGER,
-      MSRP INTEGER NOT NULL,
+      "MSRP" INTEGER NOT NULL,
       image varchar(2048)
     );`);
 
@@ -152,6 +152,12 @@ async function seedData() {
     await paymentsData();
     await addressesData();
     await categoriesData();
+    await productsData();
+    await ordersData();
+    await userPaymentData();
+    await orderProductsData();
+
+    console.log("Finished seeding data!");
   } catch (error) {
     throw error;
   }
@@ -355,6 +361,207 @@ async function categoriesData() {
     console.log("Inserted categoriesData!");
   } catch (error) {
     console.error("Error running categoriesData :(");
+    throw error;
+  }
+}
+
+async function productsData() {
+  try {
+    const products = [
+      {
+        categoryId: 1,
+        SKU: 64738293,
+        productName: "Crazy Coconuts!",
+        productDescription: "Coconuts painted by Coco herself!",
+        currentPrice: 50000,
+        productQuantity: 1,
+        discount: 0,
+        MSRP: 100000,
+        image: "http://someimage.fakeurl",
+      },
+      {
+        categoryId: 2,
+        SKU: 71264738,
+        productName: "Coconut",
+        productDescription: "Get your antioxidants with these nuts!",
+        currentPrice: 200,
+        productQuantity: 200,
+        discount: 0,
+        MSRP: 300,
+        image: "http://someimage.fakeurl",
+      },
+      {
+        categoryId: 3,
+        SKU: 56749231,
+        productName: "Cocomelons",
+        productDescription: "Lululemons with coconuts (size SMed)!",
+        currentPrice: 7000,
+        productQuantity: 1,
+        discount: 0,
+        MSRP: 300,
+        image: "http://someimage.fakeurl",
+      },
+    ];
+
+    for (const product of products) {
+      await client.query(
+        `
+      INSERT INTO products
+      ("categoryId", "SKU", "productName" , "productDescription", "currentPrice", "productQuantity", discount, "MSRP", image)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);
+    `,
+        [
+          product.categoryId,
+          product.SKU,
+          product.productName,
+          product.productDescription,
+          product.currentPrice,
+          product.productQuantity,
+          product.discount,
+          product.MSRP,
+          product.image,
+        ]
+      );
+    }
+    console.log("Inserted productsData!");
+  } catch (error) {
+    console.error("Error running productsData :(");
+    throw error;
+  }
+}
+
+async function ordersData() {
+  try {
+    const orders = [
+      {
+        userId: 1,
+        paymentId: 1,
+        salesTax: 9,
+        total: 10000,
+        discount: 0,
+        isActive: true,
+        paymentDate: "01/03/21",
+      },
+      {
+        userId: 2,
+        paymentId: 2,
+        salesTax: 9,
+        total: 2500,
+        discount: 1000,
+        isActive: false,
+        paymentDate: "04/13/21",
+      },
+      {
+        userId: 3,
+        paymentId: 3,
+        salesTax: 9,
+        total: 5000,
+        discount: 500,
+        isActive: true,
+        paymentDate: "11/24/21",
+      },
+    ];
+
+    for (const order of orders) {
+      await client.query(
+        `
+      INSERT INTO orders
+      ("userId", "paymentId", "salesTax", total, discount, "isActive", "paymentDate")
+      VALUES ($1, $2, $3, $4, $5, $6, $7);
+    `,
+        [
+          order.userId,
+          order.paymentId,
+          order.salesTax,
+          order.total,
+          order.discount,
+          order.isActive,
+          order.paymentDate,
+        ]
+      );
+    }
+    console.log("Inserted ordersData!");
+  } catch (error) {
+    console.error("Error running ordersData :(");
+    throw error;
+  }
+}
+
+async function userPaymentData() {
+  try {
+    const userPayments = [
+      {
+        userId: 1,
+        paymentId: 1,
+      },
+      {
+        userId: 2,
+        paymentId: 2,
+      },
+      {
+        userId: 3,
+        paymentId: 3,
+      },
+    ];
+
+    for (const userPayment of userPayments) {
+      await client.query(
+        `
+      INSERT INTO user_payment
+      ("userId", "paymentId")
+      VALUES ($1, $2);
+    `,
+        [userPayment.userId, userPayment.paymentId]
+      );
+    }
+    console.log("Inserted userPaymentsData!");
+  } catch (error) {
+    console.error("Error running userPaymentsData :(");
+    throw error;
+  }
+}
+
+async function orderProductsData() {
+  try {
+    const orderProducts = [
+      {
+        orderId: 1,
+        productId: 1,
+        historicalPrice: 10000,
+        quantity: 1,
+      },
+      {
+        orderId: 2,
+        productId: 2,
+        historicalPrice: 1300,
+        quantity: 1,
+      },
+      {
+        orderId: 3,
+        productId: 3,
+        historicalPrice: 2000,
+        quantity: 5,
+      },
+    ];
+
+    for (const orderProduct of orderProducts) {
+      await client.query(
+        `
+      INSERT INTO order_products
+      ("orderId", "productId", "historicalPrice", quantity)
+      VALUES ($1, $2, $3, $4);
+    `,
+        [
+          orderProduct.orderId,
+          orderProduct.productId,
+          orderProduct.historicalPrice,
+          orderProduct.quantity,
+        ]
+      );
+    }
+    console.log("Inserted orderProductsData!");
+  } catch (error) {
+    console.error("Error running orderProductsData :(");
     throw error;
   }
 }
