@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Sidebar() {
+function SideBar() {
   return (
     <div>
       This is the sidebar!
@@ -10,4 +10,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default SideBar;
