@@ -62,7 +62,7 @@ async function getPaymentInfo(userId, paymentId) {
     `
     SELECT *
     FROM payments
-    WHERE "userId"=$1, "paymentId"=$1; 
+    WHERE "userId"=$1 AND "paymentId"=$2; 
     `,
     [userId, paymentId]
   );
