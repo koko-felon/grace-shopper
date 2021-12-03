@@ -1,7 +1,7 @@
-const { client } = require('./index');
-const { rebuildDB, seedData } = require('./seedData');
+const { client } = require("./index");
+const { rebuildDB, seedData } = require("./seedData");
 
-describe('rebuildDB', () => {
+describe("rebuildDB", () => {
   beforeAll(async () => {
     await client.connect();
   });
@@ -12,7 +12,7 @@ describe('rebuildDB', () => {
 
   it("should create the users table", async () => {
     await rebuildDB();
-    const { rows } = await client.query(/*sql*/`
+    const { rows } = await client.query(/*sql*/ `
       SELECT * FROM users;
     `);
     expect(rows).toBeTruthy();
@@ -21,10 +21,13 @@ describe('rebuildDB', () => {
   it("should create the default test user", async () => {
     await rebuildDB();
     await seedData();
-    const { rows } = await client.query(/*sql*/`
+    const { rows } = await client.query(
+      /*sql*/ `
       SELECT * from users
       WHERE username = $1
-    `,['testuser']);
+    `,
+      ["testuser"]
+    );
     expect(rows.length).toBe(1);
-  })
-}); 
+  });
+});
