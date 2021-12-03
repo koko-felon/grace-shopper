@@ -6,6 +6,7 @@
   "scripts": {
     "postinstall": "npm run build",
     "start": "per-env",
+    "start-server": "nodemon src/express/server.js",
     "start:development": "nodemon src/express/server.js & react-scripts start",
     "start:production": "node src/express/server.js",
     "build": "react-scripts build",
