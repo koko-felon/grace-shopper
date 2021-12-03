@@ -1,5 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Login from "./Login";
+import Register from "./Register";
+import Home from "./Home";
+import ThisWeeksSteals from "./ThisWeeksSteals";
+import SingleCategory from "./SingleCategory";
 
 const App = () => {
   return (
@@ -7,13 +12,19 @@ const App = () => {
       <Router>
         <Switch>
           <Route exact path="/">
-            <h1>Welcome to the home page!</h1>
+            <Home />
           </Route>
           <Route path="/Login">
-            <h1>Welcome to the Login page!</h1>
+            <Login />
           </Route>
           <Route path="/Register">
-            <h1>Welcome to the Register page!</h1>
+            <Register />
+          </Route>
+          <Route path="/ThisWeeksSteals">
+            <ThisWeeksSteals />
+          </Route>
+          <Route path="/SingleCategory">
+            <SingleCategory />
           </Route>
         </Switch>
       </Router>
