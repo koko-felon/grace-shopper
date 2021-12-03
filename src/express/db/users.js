@@ -1,5 +1,5 @@
 const client = require("./client");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const SALT_COUNT = 10;
 
 async function createUser({
