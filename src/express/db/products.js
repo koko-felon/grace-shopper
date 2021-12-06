@@ -1,4 +1,4 @@
-const client = require("./client");
+const { client } = require("./index.js");
 
 async function createProduct({
   categoryId,
@@ -58,13 +58,17 @@ async function getProductById(productId) {
 }
 
 async function updateProduct(id, ...fields) {
-  const fieldNames = Object.keys(fields);
+  console.log("Inside Update Product");
 
+  const fieldNames = Object.keys(fields);
+  console.log("Field Names", fieldNames);
   const setString = fieldNames
     .map((fieldName, index) => {
       return `${fieldName}=$${index + 2}`;
     })
     .join(",");
+
+  console.log("LOOKING FOR setString", setString);
 
   const fieldValues = Object.values(fields);
 
@@ -88,6 +92,7 @@ async function deleteProduct(productId) {
   } = await client.query(
     `
         DELETE FROM products WHERE id=$1 
+        RETURNING *
         `,
     [productId]
   );
@@ -95,10 +100,10 @@ async function deleteProduct(productId) {
   return product;
 }
 
-module.exports(
+module.exports = {
   createProduct,
   getProducts,
   getProductById,
   updateProduct,
-  deleteProduct
-);
+  deleteProduct,
+};

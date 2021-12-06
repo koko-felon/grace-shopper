@@ -1,4 +1,4 @@
-const client = require("./client");
+const client = require("./index.js");
 
 //database functions
 async function createPaymentInfoWithUserId(userId) {

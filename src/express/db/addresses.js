@@ -1,4 +1,4 @@
-const client = require("./client");
+const client = require("./index.js");
 
 async function getAddressByUserId(userId) {
   const {

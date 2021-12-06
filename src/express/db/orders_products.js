@@ -1,4 +1,4 @@
-const client = require("./client");
+const client = require("./index.js");
 
 async function addToCart({ orderId, productId, historicalPrice, quantity }) {
   const {
