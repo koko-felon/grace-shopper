@@ -1,10 +1,12 @@
 const usersRouter = require("express").Router();
 const { requireUser } = require("./utils");
-const { getUserByEmail } = require("../db/users");
+const { createUser, getUserByEmail } = require("../db/users");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const { JWT_SECRET } = process.env;
 
-usersRouter.get("/authenticate", requireUser, (req, res, next) => {
+usersRouter.get("/auth", requireUser, async (req, res, next) => {
+  console.log("Inside /authenticate route");
   res.send({ success: true, user: req.user });
 });
 
@@ -22,8 +24,11 @@ usersRouter.post("/login", async (req, res, next) => {
 
   try {
     const user = await getUserByEmail(email);
+    console.log("User: ", user);
 
-    if (user && user.password == password) {
+    const validPassword = bcrypt.compare(password, user.password);
+
+    if (validPassword) {
       const token = jwt.sign(
         {
           id: user.id,
@@ -50,6 +55,7 @@ usersRouter.post("/register", async (req, res, next) => {
 
   try {
     const _user = await getUserByEmail(email);
+    console.log("getUserByEmail");
 
     if (_user) {
       next({
@@ -63,6 +69,8 @@ usersRouter.post("/register", async (req, res, next) => {
       });
     }
 
+    console.log("passing tests");
+
     const user = await createUser({
       email,
       phoneNumber,
@@ -70,6 +78,8 @@ usersRouter.post("/register", async (req, res, next) => {
       firstName,
       lastName,
     });
+
+    console.log("createUser: ", user);
 
     const token = jwt.sign(
       {

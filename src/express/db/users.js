@@ -9,6 +9,7 @@ async function createUser({
   firstName,
   lastName,
 }) {
+  console.log("Inside createUser");
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
 
   const {
@@ -23,6 +24,7 @@ async function createUser({
     [email, phoneNumber, hashedPassword, firstName, lastName]
   );
 
+  console.log(user);
   delete user.password;
   return user;
 }
