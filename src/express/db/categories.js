@@ -1,4 +1,4 @@
-const client = require("./client");
+const { client } = require("./index");
 
 //database functions
 async function getAllCategories() {
@@ -57,9 +57,9 @@ async function deleteCategory(categoryId) {
   return category;
 }
 
-module.exports(
+module.exports = {
   getAllCategories,
   createCategory,
   updateCategory,
-  deleteCategory
-);
+  deleteCategory,
+};
