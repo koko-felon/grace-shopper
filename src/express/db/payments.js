@@ -1,4 +1,4 @@
-const client = require("./client");
+const { client } = require("./index");
 
 //database functions
 async function createPaymentInfoWithUserId(userId) {
@@ -81,10 +81,10 @@ async function deletePaymentInfo(paymentId) {
   return paymentInfo;
 }
 
-module.exports(
+module.exports = {
   createPaymentInfoWithUserId,
   updatePaymentInfo,
   getAllUserPaymentInfo,
   getPaymentInfo,
-  deletePaymentInfo
-);
+  deletePaymentInfo,
+};

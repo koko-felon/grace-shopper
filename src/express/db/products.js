@@ -1,4 +1,4 @@
-const client = require("./client");
+const { client } = require("./index");
 
 async function createProduct({
   categoryId,
@@ -95,10 +95,10 @@ async function deleteProduct(productId) {
   return product;
 }
 
-module.exports(
+module.exports = {
   createProduct,
   getProducts,
   getProductById,
   updateProduct,
-  deleteProduct
-);
+  deleteProduct,
+};

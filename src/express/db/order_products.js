@@ -1,4 +1,4 @@
-const client = require("./client");
+const { client } = require("./index");
 
 async function addToCart({ orderId, productId, historicalPrice, quantity }) {
   const {
@@ -46,4 +46,4 @@ async function updateCart({ orderId, productId, quantity }) {
   return order_product;
 }
 
-module.exports(addToCart, removeFromCart, updateCart);
+module.exports = { addToCart, removeFromCart, updateCart };
