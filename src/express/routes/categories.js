@@ -2,6 +2,7 @@ const categoriesRouter = require("express").Router();
 const {
   getAllCategories,
   updateCategory,
+  getCategoryById,
   createCategory,
   deleteCategory,
 } = require("../db/categories");
