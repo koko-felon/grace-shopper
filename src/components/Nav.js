@@ -6,8 +6,8 @@ function Nav() {
     <div>
       <Link to="/">Home</Link>
       <div>
-        <Link to="/Register">Register</Link>
-        <Link to="/Login">Login</Link>
+        <Link to="/Login">Login /</Link>
+        <Link to="/Register"> Register</Link>
       </div>
       <Link to="/SingleCategory">SingleCategory</Link>
     </div>
