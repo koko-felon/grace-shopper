@@ -4,7 +4,7 @@ const {
   updateCategory,
   createCategory,
   deleteCategory,
-} = require("../db");
+} = require("../db/categories");
 
 // get all categories
 categoriesRouter.get("/", async (req, res, next) => {

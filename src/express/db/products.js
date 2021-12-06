@@ -57,33 +57,27 @@ async function getProductById(productId) {
   return product;
 }
 
-async function updateProduct(id, ...fields) {
-  console.log("Inside Update Product");
+async function updateProduct(id, fields = {}) {
+  const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(", ");
 
-  const fieldNames = Object.keys(fields);
-  console.log("Field Names", fieldNames);
-  const setString = fieldNames
-    .map((fieldName, index) => {
-      return `${fieldName}=$${index + 2}`;
-    })
-    .join(",");
-
-  console.log("LOOKING FOR setString", setString);
-
-  const fieldValues = Object.values(fields);
-
-  const { rows } = await client.query(
-    `
-  UPDATE products SET ${setString}
-  WHERE id = $1
-  RETURNING *
-  `,
-    [id, ...fieldValues]
-  );
-
-  const [product] = rows;
-
-  return product;
+  try {
+    if (setString.length > 0) {
+      await client.query(
+        `
+        UPDATE products
+        SET ${setString}
+        WHERE id=${id}
+        RETURNING *;
+      `,
+        Object.values(fields)
+      );
+    }
+    return await getProductById(id);
+  } catch (error) {
+    throw error;
+  }
 }
 
 async function deleteProduct(productId) {

@@ -21,7 +21,7 @@ async function createAddressByUserId({
   postalCode,
 }) {
   const {
-    rows: [address],
+    rows: [singleAddress],
   } = await client.query(
     `
     INSERT INTO addresses("userId", address, city, state, "postalCode")
@@ -31,7 +31,7 @@ async function createAddressByUserId({
     [userId, address, city, state, postalCode]
   );
 
-  return address;
+  return singleAddress;
 }
 
 async function updateAddressByUserId({ id, ...fields }) {

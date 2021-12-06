@@ -51,8 +51,9 @@ async function deleteCategory(categoryId) {
   } = await client.query(
     `
     DELETE FROM categories WHERE id = $1
+    RETURNING *
     `,
-    [category]
+    [categoryId]
   );
   return category;
 }

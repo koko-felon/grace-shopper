@@ -4,7 +4,7 @@ const {
   updateAddressByUserId,
   createAddressByUserId,
   deleteAddress,
-} = require("../db");
+} = require("../db/addresses");
 
 // GET REQUEST for single address
 addressesRouter.get("/:id", async (req, res, next) => {
