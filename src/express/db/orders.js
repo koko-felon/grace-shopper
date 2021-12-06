@@ -1,4 +1,4 @@
-const client = require("./index.js");
+const { client } = require("./index");
 
 async function getAllOrders() {
   const { rows } = await client.query(

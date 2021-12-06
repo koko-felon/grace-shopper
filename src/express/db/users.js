@@ -1,4 +1,4 @@
-const client = require("./index.js");
+const { client } = require("./index");
 const bcrypt = require("bcrypt");
 const SALT_COUNT = 10;
 
@@ -60,6 +60,25 @@ async function getUserById(userId) {
   return user;
 }
 
+async function getUserByEmail(email) {
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+      SELECT *
+      FROM users
+      WHERE email=$1;
+    `,
+      [email]
+    );
+
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function updateUser({ id, ...fields }) {
   const fieldNames = Object.keys(fields);
 
@@ -97,4 +116,11 @@ async function deleteUser(userId) {
   return user;
 }
 
-module.exports(createUser, getUser, getUserById, updateUser, deleteUser);
+module.exports = {
+  createUser,
+  getUser,
+  getUserById,
+  getUserByEmail,
+  updateUser,
+  deleteUser,
+};

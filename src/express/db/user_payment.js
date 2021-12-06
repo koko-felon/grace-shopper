@@ -1,4 +1,4 @@
-const client = require("./index.js");
+const { client } = require("./index");
 
 async function addPayment({ userId, paymentId }) {
   const {
@@ -30,4 +30,4 @@ async function removePayment({ userId, paymentId }) {
   return rows[0];
 }
 
-module.exports(addPayment, removePayment);
+module.exports = { addPayment, removePayment };
