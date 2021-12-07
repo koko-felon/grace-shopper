@@ -2,9 +2,9 @@ const usersRouter = require("express").Router();
 const { requireUser } = require("./utils");
 const { getUserByEmail } = require("../db/users");
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = process.env;
 
-usersRouter.get("/authenticate", requireUser, (req, res, next) => {
+usersRouter.get("/auth", requireUser, (req, res, next) => {
+  console.log("inside /authenticate");
   res.send({ success: true, user: req.user });
 });
 
