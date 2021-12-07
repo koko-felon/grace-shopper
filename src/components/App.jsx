@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
@@ -7,6 +8,8 @@ import ThisWeeksSteals from "./ThisWeeksSteals";
 import SingleCategory from "./SingleCategory";
 
 const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
   return (
     <div className="App">
       <Router>
@@ -15,10 +18,10 @@ const App = () => {
             <Home />
           </Route>
           <Route path="/Login">
-            <Login />
+            <Login  setIsLoggedIn={setIsLoggedIn}/>
           </Route>
           <Route path="/Register">
-            <Register />
+            <Register setIsLoggedIn={setIsLoggedIn}/>
           </Route>
           <Route path="/ThisWeeksSteals">
             <ThisWeeksSteals />

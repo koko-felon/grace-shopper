@@ -29,7 +29,7 @@ usersRouter.post("/login", async (req, res, next) => {
           id: user.id,
           user: email,
         },
-        JWT_SECRET
+        process.env.JWT_SECRET
       );
       res.send({ message: "you're logged in!", token: token });
     } else {
