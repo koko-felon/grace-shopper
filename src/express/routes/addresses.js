@@ -1,7 +1,7 @@
 const addressesRouter = require("express").Router();
 const {
   getAddressByUserId,
-  updateAddressByUserId,
+  updateAddressById,
   createAddressByUserId,
   deleteAddress,
 } = require("../db/addresses");
@@ -18,8 +18,9 @@ addressesRouter.get("/:id", async (req, res, next) => {
 
 // PATCH REQUEST for single address
 addressesRouter.patch("/:id", async (req, res, next) => {
+  const addressId = req.params.id;
   try {
-    const address = await updateAddressByUserId(req.body);
+    const address = await updateAddressById(addressId, req.body);
     res.send(address);
   } catch (error) {
     next(error);

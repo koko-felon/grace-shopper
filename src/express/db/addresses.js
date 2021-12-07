@@ -34,29 +34,28 @@ async function createAddressByUserId({
   return singleAddress;
 }
 
-async function updateAddressByUserId({ id, ...fields }) {
-  const fieldNames = Object.keys(fields);
+async function updateAddressById(id, fields = {}) {
+  const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(", ");
 
-  const setString = fieldNames
-    .map((fieldName, index) => {
-      return `${fieldName}=$${index + 2}`;
-    })
-    .join(",");
+  try {
+    const {
+      rows: [address],
+    } = await client.query(
+      `
+        UPDATE addresses
+        SET ${setString}
+        WHERE id=${id}
+        RETURNING *;
+      `,
+      Object.values(fields)
+    );
 
-  const fieldValues = Object.values(fields);
-
-  const { rows } = await client.query(
-    `
-  UPDATE addresses SET ${setString}
-  WHERE id = $1
-  RETURNING *
-  `,
-    [id, ...fieldValues]
-  );
-
-  const [address] = rows;
-
-  return address;
+    return address;
+  } catch (error) {
+    throw error;
+  }
 }
 
 async function deleteAddress(addressId) {
@@ -75,6 +74,6 @@ async function deleteAddress(addressId) {
 module.exports = {
   getAddressByUserId,
   createAddressByUserId,
-  updateAddressByUserId,
+  updateAddressById,
   deleteAddress,
 };
