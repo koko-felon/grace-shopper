@@ -8,6 +8,8 @@ import ThisWeeksSteals from "./ThisWeeksSteals";
 import SingleCategory from "./SingleCategory";
 
 const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
   return (
     <div className="App">
       <Router>
@@ -16,10 +18,10 @@ const App = () => {
             <Home />
           </Route>
           <Route path="/Login">
-            <Login />
+            <Login  setIsLoggedIn={setIsLoggedIn}/>
           </Route>
           <Route path="/Register">
-            <Register />
+            <Register setIsLoggedIn={setIsLoggedIn}/>
           </Route>
           <Route path="/ThisWeeksSteals">
             <ThisWeeksSteals />
