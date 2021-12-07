@@ -23,26 +23,40 @@ async function createCategory({ name, description, image }) {
   return category;
 }
 
-async function updateCategory({ id, ...fields }) {
-  const fieldNames = Object.keys(fields);
+async function getCategoryById(id) {
+  const {
+    rows: [category],
+  } = await client.query(
+    `
+         SELECT * FROM categories WHERE id=$1;
+        `,
+    [id]
+  );
 
-  const setString = fieldNames
-    .map((fieldName, index) => {
-      return `${fieldName}=$${index + 2}`;
-    })
+  return category;
+}
+
+async function updateCategory(id, fields = {}) {
+  const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
     .join(", ");
 
-  const fieldValues = Object.values(fields);
-  const { rows } = await client.query(
-    `
-    UPDATE categories SET ${setString}
-    WHERE id = $1
-    RETURNING *;
-    `,
-    [id, ...fieldValues]
-  );
-  const [category] = rows;
-  return category;
+  try {
+    if (setString.length > 0) {
+      await client.query(
+        `
+        UPDATE categories
+        SET ${setString}
+        WHERE id=${id}
+        RETURNING *;
+      `,
+        Object.values(fields)
+      );
+    }
+    return await getCategoryById(id);
+  } catch (error) {
+    throw error;
+  }
 }
 
 async function deleteCategory(categoryId) {
@@ -51,8 +65,9 @@ async function deleteCategory(categoryId) {
   } = await client.query(
     `
     DELETE FROM categories WHERE id = $1
+    RETURNING *
     `,
-    [category]
+    [categoryId]
   );
   return category;
 }
@@ -60,6 +75,7 @@ async function deleteCategory(categoryId) {
 module.exports = {
   getAllCategories,
   createCategory,
+  getCategoryById,
   updateCategory,
   deleteCategory,
 };
