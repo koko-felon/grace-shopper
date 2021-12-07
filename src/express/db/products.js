@@ -57,29 +57,27 @@ async function getProductById(productId) {
   return product;
 }
 
-async function updateProduct(id, ...fields) {
-  const fieldNames = Object.keys(fields);
+async function updateProduct(id, fields = {}) {
+  const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(", ");
 
-  const setString = fieldNames
-    .map((fieldName, index) => {
-      return `${fieldName}=$${index + 2}`;
-    })
-    .join(",");
-
-  const fieldValues = Object.values(fields);
-
-  const { rows } = await client.query(
-    `
-  UPDATE products SET ${setString}
-  WHERE id = $1
-  RETURNING *
-  `,
-    [id, ...fieldValues]
-  );
-
-  const [product] = rows;
-
-  return product;
+  try {
+    if (setString.length > 0) {
+      await client.query(
+        `
+        UPDATE products
+        SET ${setString}
+        WHERE id=${id}
+        RETURNING *;
+      `,
+        Object.values(fields)
+      );
+    }
+    return await getProductById(id);
+  } catch (error) {
+    throw error;
+  }
 }
 
 async function deleteProduct(productId) {
@@ -88,6 +86,7 @@ async function deleteProduct(productId) {
   } = await client.query(
     `
         DELETE FROM products WHERE id=$1 
+        RETURNING *
         `,
     [productId]
   );
