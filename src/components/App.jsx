@@ -5,11 +5,13 @@ import Login from "./Login";
 import Register from "./Register";
 import Home from "./Home";
 import ThisWeeksSteals from "./ThisWeeksSteals";
-import SingleCategory from "./SingleCategory";
+import Art from "./Art";
+import FoodDrink from "./FoodDrink";
+import Apparel from "./Apparel";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+
   return (
     <div className="App">
       <Router>
@@ -18,16 +20,22 @@ const App = () => {
             <Home />
           </Route>
           <Route path="/Login">
-            <Login  setIsLoggedIn={setIsLoggedIn}/>
+            <Login setIsLoggedIn={setIsLoggedIn} />
           </Route>
           <Route path="/Register">
-            <Register setIsLoggedIn={setIsLoggedIn}/>
+            <Register setIsLoggedIn={setIsLoggedIn} />
           </Route>
           <Route path="/ThisWeeksSteals">
             <ThisWeeksSteals />
           </Route>
-          <Route path="/SingleCategory">
-            <SingleCategory />
+          <Route path="/Art">
+            <Art />
+          </Route>
+          <Route path="/FoodDrink">
+            <FoodDrink />
+          </Route>
+          <Route path="/Apparel">
+            <Apparel />
           </Route>
         </Switch>
       </Router>
