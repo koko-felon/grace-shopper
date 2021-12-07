@@ -9,23 +9,22 @@ const Login = ({ setIsLoggedIn }) => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState(null);
+  // const token = localStorage.getItem("token");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await fetch(
-      `http://dashboard.heroku.com/apps/coco-felon/api/users/login`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      }
-    );
+    const response = await fetch(`/api/users/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
     const data = await response.json();
     console.log(data.token);
     window.localStorage.setItem("token", data.token);

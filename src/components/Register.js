@@ -19,19 +19,16 @@ const Register = ({ setIsLoggedIn }) => {
     if (password !== confirmPassword) {
       setErrorMessage("Passwords do not match");
     } else {
-      const response = await fetch(
-        `http://dashboard.heroku.com/apps/coco-felon/api/users/register`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            password,
-          }),
-        }
-      );
+      const response = await fetch(`/api/users/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
       const data = await response.json();
       console.log(data);
       window.localStorage.setItem("token", data.token);
