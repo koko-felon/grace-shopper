@@ -1,3 +1,4 @@
+const { route } = require("../routes/orders");
 const { client } = require("./index");
 
 async function getAllOrders() {
@@ -11,10 +12,60 @@ async function getAllOrders() {
   return rows;
 }
 
+function mapTheRows(rows) {
+  const mappedOrders = {};
+
+  for (const row of rows) {
+    if (!mappedOrders[row.id]) {
+      mappedOrders[row.id] = {
+        orderId: row.id,
+        userId: row.userId,
+        paymentId: row.paymentId,
+        salesTax: row.salesTax,
+        total: row.total,
+        discount: row.discount,
+        isActive: row.isActive,
+        paymentDate: row.paymentDate,
+        products: [],
+      };
+      if (row.productId) {
+        mappedOrders[row.id].products.push({
+          productId: row.productId,
+          historicalPrice: row.historicalPrice,
+          quantity: row.quantity,
+          categoryId: row.categoryId,
+          SKU: row.SKU,
+          productName: row.productName,
+          productDescription: row.productDescription,
+          currentPrice: row.currentPrice,
+          productQuantity: row.productQuantity,
+          MSRP: row.MSRP,
+          image: row.image,
+        });
+      }
+    } else {
+      if (row.productId) {
+        mappedOrders[row.id].products.push({
+          productId: row.productId,
+          historicalPrice: row.historicalPrice,
+          quantity: row.quantity,
+          categoryId: row.categoryId,
+          SKU: row.SKU,
+          productName: row.productName,
+          productDescription: row.productDescription,
+          currentPrice: row.currentPrice,
+          productQuantity: row.productQuantity,
+          MSRP: row.MSRP,
+          image: row.image,
+        });
+      }
+    }
+  }
+  return Object.values(mappedOrders);
+}
+
 async function getOrderById(orderId) {
-  const {
-    rows: [order],
-  } = await client.query(
+  const { rows } = await client.query(
     ` SELECT 
  orders.id , 
   orders."userId" ,
@@ -46,7 +97,8 @@ ON order_products."productId" = products.id
     [orderId]
   );
 
-  return order;
+  const orderArray = mapTheRows(rows);
+  return orderArray[0];
 }
 
 async function getCart(userId) {
@@ -82,36 +134,37 @@ async function getCart(userId) {
     `,
     [userId]
   );
-  return rows;
+
+  const orderArray = mapTheRows(rows);
+  return orderArray[0];
 }
 
-async function updateOrder({ id, ...fields }) {
-  const fieldNames = Object.keys(fields);
-  const setString = fieldNames
-    .map((fieldName, index) => {
-      return `${fieldName}=$${index + 2}`;
-    })
-    .join(",");
+async function updateOrder(id, fields = {}) {
+  const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(", ");
 
-  const fieldValues = Object.values(fields);
-
-  const { rows } = await client.query(
-    `
-  UPDATE orders SET ${setString}
-  WHERE id = $1
-  RETURNING *
-  `,
-    [id, ...fieldValues]
-  );
-
-  const [order] = rows;
-
-  return order;
+  try {
+    if (setString.length > 0) {
+      await client.query(
+        `
+        UPDATE orders
+        SET ${setString}
+        WHERE id=${id}
+        RETURNING *;
+      `,
+        Object.values(fields)
+      );
+    }
+    return getOrderById(id);
+  } catch (error) {
+    throw error;
+  }
 }
 
 async function deleteOrder(orderId) {
   const {
-    rows: [orderId],
+    rows: [order],
   } = await client.query(
     `
     DELETE FROM orders

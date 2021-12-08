@@ -41,7 +41,8 @@ apiRouter.get("/", (req, res, next) => {
 apiRouter.use("/products", require("./products"));
 apiRouter.use("/addresses", require("./addresses"));
 apiRouter.use("/categories", require("./categories"));
-
+apiRouter.use("/orders", require("./orders"));
+apiRouter.use("/orderProducts", require("./order_products"));
 apiRouter.use("/users", require("./users"));
 // use your sub-routers here
 
