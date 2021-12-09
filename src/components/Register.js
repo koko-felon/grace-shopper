@@ -19,13 +19,17 @@ const Register = ({ setIsLoggedIn }) => {
     if (password !== confirmPassword) {
       setErrorMessage("Passwords do not match");
     } else {
+      console.log("About to Register....");
       const response = await fetch(`/api/users/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          firstName,
+          lastName,
           email,
+          phoneNumber,
           password,
         }),
       });
@@ -35,7 +39,7 @@ const Register = ({ setIsLoggedIn }) => {
 
       if (data.token) {
         setIsLoggedIn(true);
-        setSuccessMessage("Thanks for registering!");
+        setSuccessMessage("Welcome to your new Felons account!");
         setTimeout(() => {
           history.push("/");
         }, 1500);

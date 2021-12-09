@@ -26,7 +26,7 @@ function Home(props) {
   return (
     <>
       <Nav />
-      <div>This is the Home Page!</div>
+      <div></div>
       <Products />
       <SideBar />
       <Footer />
