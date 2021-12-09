@@ -3,11 +3,11 @@ const bcrypt = require("bcrypt");
 const SALT_COUNT = 10;
 
 async function createUser({
+  firstName,
+  lastName,
   email,
   phoneNumber,
   password,
-  firstName,
-  lastName,
 }) {
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
 
@@ -24,6 +24,7 @@ async function createUser({
   );
 
   delete user.password;
+  console.log("user:", user);
   return user;
 }
 

@@ -1,7 +1,8 @@
 const usersRouter = require("express").Router();
 const { requireUser } = require("./utils");
-const { getUserByEmail } = require("../db/users");
+const { getUserByEmail, createUser } = require("../db/users");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 usersRouter.get("/auth", requireUser, (req, res, next) => {
   console.log("inside /authenticate");
@@ -22,8 +23,9 @@ usersRouter.post("/login", async (req, res, next) => {
 
   try {
     const user = await getUserByEmail(email);
-
-    if (user && user.password == password) {
+    const passwordsMatch = bcrypt.compare(password, user.password);
+    console.log("USER IN OUR LOGIN ROUTE", user);
+    if (passwordsMatch) {
       const token = jwt.sign(
         {
           id: user.id,
@@ -35,7 +37,7 @@ usersRouter.post("/login", async (req, res, next) => {
     } else {
       next({
         name: "IncorrectCredentialsError",
-        message: "email or password is incorrect",
+        message: "Username or password is incorrect",
       });
     }
   } catch (error) {
@@ -46,7 +48,7 @@ usersRouter.post("/login", async (req, res, next) => {
 
 // POST /api/users/register
 usersRouter.post("/register", async (req, res, next) => {
-  const { email, phoneNumber, password, firstName, lastName } = req.body;
+  const { firstName, lastName, email, phoneNumber, password } = req.body;
 
   try {
     const _user = await getUserByEmail(email);
@@ -56,13 +58,8 @@ usersRouter.post("/register", async (req, res, next) => {
         name: "UserExistsError",
         message: "A user by that email already exists",
       });
-    } else if (password.length < 8) {
-      next({
-        name: "PasswordLengthError",
-        message: "Password must be at least 6 characters",
-      });
     }
-
+    console.log("About to create user....");
     const user = await createUser({
       email,
       phoneNumber,
@@ -70,6 +67,8 @@ usersRouter.post("/register", async (req, res, next) => {
       firstName,
       lastName,
     });
+
+    console.log("user in after made:", user);
 
     const token = jwt.sign(
       {
@@ -81,13 +80,14 @@ usersRouter.post("/register", async (req, res, next) => {
         expiresIn: "1w",
       }
     );
-
+    console.log("TOKEEE", token);
     res.send({
       message: "Thank you for signing up",
       token,
     });
-  } catch ({ name, message }) {
-    next({ name, message });
+  } catch (error) {
+    console.error(error);
+    next(error);
   }
 });
 
