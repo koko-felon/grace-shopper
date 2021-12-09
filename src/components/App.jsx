@@ -6,6 +6,7 @@ import Register from "./Register";
 import Home from "./Home";
 import ThisWeeksSteals from "./ThisWeeksSteals";
 import SingleCategory from "./SingleCategory";
+import Cart from "./Cart";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,6 +23,9 @@ const App = () => {
           </Route>
           <Route path="/Register">
             <Register setIsLoggedIn={setIsLoggedIn}/>
+          </Route>
+          <Route path="/Cart">
+            <Cart setIsLoggedIn={setIsLoggedIn}/>
           </Route>
           <Route path="/ThisWeeksSteals">
             <ThisWeeksSteals />
