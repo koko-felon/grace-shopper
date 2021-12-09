@@ -10,7 +10,9 @@ function Nav() {
         <Link to="/Register"> Register</Link>
         <Link to="/Cart">Add Cart Logo</Link>
       </div>
-      <Link to="/SingleCategory">SingleCategory</Link>
+      <Link to="/Art">Art</Link>
+      <Link to="/FoodDrink">Food/Drink</Link>
+      <Link to="/Apparel">Apparel</Link>
     </div>
   );
 }

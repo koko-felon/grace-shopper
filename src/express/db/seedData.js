@@ -387,7 +387,8 @@ async function productsData() {
         productQuantity: 1,
         discount: 0,
         MSRP: 100000,
-        image: "http://someimage.fakeurl",
+        image:
+          "https://media.istockphoto.com/photos/broken-coconut-isolated-on-white-picture-id165695881?b=1&k=20&m=165695881&s=170667a&w=0&h=cH19mEVHscxpL-P3GbsoWKEoSlwm_R7O6uOuzk-cCFY=",
       },
       {
         categoryId: 2,
@@ -398,7 +399,8 @@ async function productsData() {
         productQuantity: 200,
         discount: 0,
         MSRP: 300,
-        image: "http://someimage.fakeurl",
+        image:
+          "https://media.istockphoto.com/photos/broken-coconut-isolated-on-white-picture-id165695881?b=1&k=20&m=165695881&s=170667a&w=0&h=cH19mEVHscxpL-P3GbsoWKEoSlwm_R7O6uOuzk-cCFY=",
       },
       {
         categoryId: 3,
@@ -409,7 +411,8 @@ async function productsData() {
         productQuantity: 1,
         discount: 0,
         MSRP: 300,
-        image: "http://someimage.fakeurl",
+        image:
+          "https://media.istockphoto.com/photos/broken-coconut-isolated-on-white-picture-id165695881?b=1&k=20&m=165695881&s=170667a&w=0&h=cH19mEVHscxpL-P3GbsoWKEoSlwm_R7O6uOuzk-cCFY=",
       },
     ];
 

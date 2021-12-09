@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
 import Nav from "./Nav";
+
+import Products from "./Products";
+
 import Footer from "./Footer";
 import SideBar from "./SideBar";
 import axios from "axios";
@@ -24,6 +27,7 @@ function Home(props) {
     <>
       <Nav />
       <div>This is the Home Page!</div>
+      <Products />
       <SideBar />
       <Footer />
     </>
