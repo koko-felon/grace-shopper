@@ -5,9 +5,13 @@ import Login from "./Login";
 import Register from "./Register";
 import Home from "./Home";
 import ThisWeeksSteals from "./ThisWeeksSteals";
+
+import Cart from "./Cart";
+
 import Art from "./Art";
 import FoodDrink from "./FoodDrink";
 import Apparel from "./Apparel";
+
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,6 +28,9 @@ const App = () => {
           </Route>
           <Route path="/Register">
             <Register setIsLoggedIn={setIsLoggedIn} />
+          </Route>
+          <Route path="/Cart">
+            <Cart setIsLoggedIn={setIsLoggedIn}/>
           </Route>
           <Route path="/ThisWeeksSteals">
             <ThisWeeksSteals />

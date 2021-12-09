@@ -8,6 +8,7 @@ function Nav() {
       <div>
         <Link to="/Login">Login /</Link>
         <Link to="/Register"> Register</Link>
+        <Link to="/Cart">Add Cart Logo</Link>
       </div>
       <Link to="/Art">Art</Link>
       <Link to="/FoodDrink">Food/Drink</Link>
