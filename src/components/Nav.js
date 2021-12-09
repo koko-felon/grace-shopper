@@ -9,8 +9,8 @@ function Nav() {
         <Link to="/Login">Login /</Link>
         <Link to="/Register"> Register</Link>
       </div>
-      <Link to="/Art">Art</Link>
-      <Link to="/FoodDrink">Food/Drink</Link>
+      <Link to="/Art">Art | </Link>
+      <Link to="/FoodDrink">Food/Drink | </Link>
       <Link to="/Apparel">Apparel</Link>
     </div>
   );

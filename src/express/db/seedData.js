@@ -377,42 +377,123 @@ async function categoriesData() {
 
 async function productsData() {
   try {
+    //categoryId: 1 === Art Category
+    //categoryId: 2 === Food/Drink Category
+    //categoryId: 3 === Apparel Category
     const products = [
       {
         categoryId: 1,
         SKU: 64738293,
-        productName: "Crazy Coconuts!",
-        productDescription: "Coconuts painted by Coco herself!",
-        currentPrice: 50000,
+        productName: "Bulldog With Bulldogs",
+        productDescription:
+          "Created by Coco de Paris, this is an original acrylic piece handsinged by her on a streched canvas.",
+        currentPrice: 14999,
         productQuantity: 1,
         discount: 0,
-        MSRP: 100000,
+        MSRP: 22499,
         image:
-          "https://media.istockphoto.com/photos/broken-coconut-isolated-on-white-picture-id165695881?b=1&k=20&m=165695881&s=170667a&w=0&h=cH19mEVHscxpL-P3GbsoWKEoSlwm_R7O6uOuzk-cCFY=",
+          "https://www.cocodeparis.com/uploads/5/8/3/5/58353153/s833661200733038015_p815_i73_w567.jpeg",
       },
       {
         categoryId: 2,
         SKU: 71264738,
         productName: "Coconut",
         productDescription: "Get your antioxidants with these nuts!",
-        currentPrice: 200,
-        productQuantity: 200,
+        currentPrice: 199,
+        productQuantity: 232,
         discount: 0,
-        MSRP: 300,
+        MSRP: 299,
         image:
           "https://media.istockphoto.com/photos/broken-coconut-isolated-on-white-picture-id165695881?b=1&k=20&m=165695881&s=170667a&w=0&h=cH19mEVHscxpL-P3GbsoWKEoSlwm_R7O6uOuzk-cCFY=",
       },
       {
+        categoryId: 1,
+        SKU: 46382317,
+        productName: "Framed Coco Chanel Wall Art",
+        productDescription:
+          "Size 20x24 frame of Coco Chanel. Great for looking fashionable and having cool vibes.",
+        currentPrice: 7499,
+        productQuantity: 24,
+        discount: 0,
+        MSRP: 9999,
+        image:
+          "https://www.nicepng.com/png/full/763-7639957_coco-chanel-coco-chanel-illustration.png",
+      },
+      {
+        categoryId: 3,
+        SKU: 49862734,
+        productName: "Disney/Pixar Coco Baseball Shirt",
+        productDescription:
+          'Represent everyones favorite Coco with this trendy baseball shirt! (Chest 40"-42", Waist 36"-38")',
+        currentPrice: 2499,
+        productQuantity: 2,
+        discount: 0,
+        MSRP: 4999,
+        image:
+          "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTwLz9ohrKh5PG6vZjl0w6QvjG9-gz748nb5IMb291Sb2ndcT8Ql3CblGGD56wOGnIKb8FVXFOG7Bl7ex4k9ia158HbY07G0N_zZ31MB-EU6vL1Wv5m-Qz51y8&usqp=CAE",
+      },
+      {
+        categoryId: 3,
+        SKU: 61163425,
+        productName: "Matching Coconut Crop-Top/Short Set",
+        productDescription:
+          "Stay stylish and cozy with this Coconut apparel set!",
+        currentPrice: 1999,
+        productQuantity: 6,
+        discount: 0,
+        MSRP: 2499,
+        image:
+          "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRnxUIfk0BAYdwDi3NTgx1XDWH6kyyFmgkUnWnjM1AYH0SQy34JBfOXFAc5aumFO5YnEZpP_ySkZ54HNS0FGkTCBo28DIEO&usqp=CAE",
+      },
+      {
+        categoryId: 1,
+        SKU: 29231842,
+        productName: "Disney's/Pixar Coco Poster",
+        productDescription:
+          "20x24 High Digital Print of everyones favorite Coco movie! Great for getting into those Coco vibes.",
+        currentPrice: 999,
+        productQuantity: 63,
+        discount: 0,
+        MSRP: 1499,
+        image:
+          "https://mypostercollection.com/wp-content/uploads/2019/08/coco-1-646x1024.jpg",
+      },
+      {
+        categoryId: 2,
+        SKU: 15249187,
+        productName: "Cocoyams (6)",
+        productDescription: "Cheap Steals on Cocoyams 50% off!",
+        currentPrice: 99,
+        productQuantity: 1000,
+        discount: 0,
+        MSRP: 199,
+        image:
+          "https://thumbs.dreamstime.com/b/taro-root-isolated-white-background-36634033.jpg",
+      },
+      {
+        categoryId: 2,
+        SKU: 22123499,
+        productName: "Cocoa Beans (8oz)",
+        productDescription: "Make all things sweet with some Cocoa beans!",
+        currentPrice: 499,
+        productQuantity: 548,
+        discount: 0,
+        MSRP: 600,
+        image:
+          "https://media.istockphoto.com/photos/worker-holding-a-handful-of-cocoa-beans-picture-id1277772882?b=1&k=20&m=1277772882&s=170667a&w=0&h=BLHDqtYjOpwfuJfIuk-ghbDtNw4JcZrXQzZbV0rP9Lk=",
+      },
+      {
         categoryId: 3,
         SKU: 56749231,
-        productName: "Cocomelons",
-        productDescription: "Lululemons with coconuts (size SMed)!",
-        currentPrice: 7000,
-        productQuantity: 1,
+        productName: "Oversize Cutie Coconut Shirt",
+        productDescription:
+          'Cutie Coconut oversized to fit well for homewear and sleepwear! (Chest 44"-46", Waist 38"-40")',
+        currentPrice: 1499,
+        productQuantity: 33,
         discount: 0,
-        MSRP: 300,
+        MSRP: 2499,
         image:
-          "https://media.istockphoto.com/photos/broken-coconut-isolated-on-white-picture-id165695881?b=1&k=20&m=165695881&s=170667a&w=0&h=cH19mEVHscxpL-P3GbsoWKEoSlwm_R7O6uOuzk-cCFY=",
+          "https://res.cloudinary.com/teepublic/image/private/s--2i8MUlwP--/t_Resized%20Artwork/c_crop,x_10,y_10/c_fit,w_348/c_crop,g_north_west,h_626,w_470,x_-61,y_0/g_north_west,u_upload:v1462829017:production:blanks:qe3008lhp5hquxmwp4a0,x_-456,y_-325/b_rgb:eeeeee/c_limit,f_auto,h_630,q_90,w_630/v1516317859/production/designs/2290233_0.jpg",
       },
     ];
 
