@@ -10,7 +10,6 @@ usersRouter.get("/auth", requireUser, (req, res, next) => {
 });
 
 // POST /api/users/login
-
 usersRouter.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
 
