@@ -12,7 +12,6 @@ import Art from "./Art";
 import FoodDrink from "./FoodDrink";
 import Apparel from "./Apparel";
 
-
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -30,7 +29,7 @@ const App = () => {
             <Register setIsLoggedIn={setIsLoggedIn} />
           </Route>
           <Route path="/Cart">
-            <Cart setIsLoggedIn={setIsLoggedIn}/>
+            <Cart setIsLoggedIn={setIsLoggedIn} />
           </Route>
           <Route path="/ThisWeeksSteals">
             <ThisWeeksSteals />

@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Nav from "./Nav";
 import { Link, useHistory } from "react-router-dom";
 import Footer from "./Footer";
 
+import { userContext } from "../context/userContext";
+
 const Login = ({ setIsLoggedIn }) => {
+  const { userState, userDispatch } = useContext(userContext);
+
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +30,7 @@ const Login = ({ setIsLoggedIn }) => {
       }),
     });
     const data = await response.json();
-    console.log(data.token);
+    console.log(data);
     window.localStorage.setItem("token", data.token);
 
     if (data.token) {
