@@ -1,16 +1,30 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import { userContext } from "../context/userContext";
 
 function Nav() {
   const { userState, userDispatch } = useContext(userContext);
+  const token = localStorage.getItem("token");
+
+  const logout = () => {
+    localStorage.clear("token");
+    userDispatch({ type: "LOG_OUT", value: null });
+  };
 
   return (
     <div>
+      {token ? <h3>Welcome Back, {userState.firstName}</h3> : null}
       <Link to="/">Home</Link>
       <div>
-        <Link to="/Login">Login /</Link>
-        <Link to="/Register"> Register</Link>
+        {!token ? (
+          <>
+            <Link to="/Login">Login /</Link>
+            <Link to="/Register"> Register</Link>
+          </>
+        ) : (
+          <button onClick={logout}>Logout</button>
+        )}
         <Link to="/Cart">Add Cart Logo</Link>
       </div>
 
