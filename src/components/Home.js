@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import Nav from "./Nav";
 
 import Products from "./Products";
@@ -7,7 +7,29 @@ import Footer from "./Footer";
 import SideBar from "./SideBar";
 import axios from "axios";
 
+import { userContext } from "../context/userContext";
+
 function Home(props) {
+  const { userState, userDispatch } = useContext(userContext);
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    const getAuth = async () => {
+      if (localStorage.token) {
+        const response = await fetch(`/api/users/auth`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+        console.log(data);
+        userDispatch({ type: "SET_USER", value: data.user });
+      }
+    };
+    getAuth();
+  }, []);
+
   useEffect(() => {
     const getProductsWithFetch = async () => {
       const response = await fetch("/api/products");

@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { userContext } from "../context/userContext";
 
 function Nav() {
+  const { userState, userDispatch } = useContext(userContext);
+
   return (
     <div>
       <Link to="/">Home</Link>
@@ -13,7 +16,6 @@ function Nav() {
 
       <Link to="/Art">Art</Link>
       <Link to="/FoodDrink">Food & Drink</Link>
-
       <Link to="/Apparel">Apparel</Link>
     </div>
   );
