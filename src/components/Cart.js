@@ -1,20 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+// import { Link } from "react-router-dom";
 
 function Cart(props) {
-  const [cart, setCart] = useState([]);
+  const { cartContext, cartDispatch } = useContext(cartContext);
+  // const { userState } = useContext(userContext);
 
   useEffect(() => {
     const getCart = async () => {
-      const response = await fetch(`/users/:userId/cart`);
+      const response = await fetch(`/api/orders/users/1/cart`);
       const data = await response.json();
       setCart(data);
     };
 
     getCart();
   }, []);
-
-  const cart
 
   return (
     <>
