@@ -7,23 +7,6 @@ function Nav() {
   const { userState, userDispatch } = useContext(userContext);
   const token = localStorage.getItem("token");
 
-  //Make this a auth hook?
-  useEffect(() => {
-    const getAuth = async () => {
-      if (localStorage.token) {
-        const response = await fetch(`/api/users/auth`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const data = await response.json();
-        userDispatch({ type: "SET_USER", value: data.user });
-      }
-    };
-    getAuth();
-  }, []);
-
   const logout = () => {
     localStorage.clear("token");
     userDispatch({ type: "LOG_OUT", value: null });
