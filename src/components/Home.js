@@ -13,6 +13,7 @@ function Home(props) {
   const { userState, userDispatch } = useContext(userContext);
   const token = localStorage.getItem("token");
 
+  //Make this a auth hook?
   useEffect(() => {
     const getAuth = async () => {
       if (localStorage.token) {
