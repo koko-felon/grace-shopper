@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import AddToCart from "./AddToCart";
 
 function Products(props) {
   const [products, setProducts] = useState([]);
@@ -25,6 +26,7 @@ function Products(props) {
           <p>Qty In Stock: {product.productQuantity}</p>
           <p>MSRP: ${product.MSRP}</p>
           <p>SKU: {product.SKU}</p>
+          <AddToCart productId={product.id} />
         </div>
       </>
     );

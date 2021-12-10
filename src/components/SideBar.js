@@ -26,8 +26,11 @@ function Sidebar() {
         <div>
           <h2>Product: {product.productName}</h2>
           <img src={product.image} />
+          <p>Description: {product.productDescription}</p>
           <p>Price: {product.currentPrice}</p>
           <p>Quantity: {product.productQuantity}</p>
+          <p>MSRP: {product.MSRP}</p>
+          <p>SKU: {product.SKU}</p>
         </div>
       </>
     );
