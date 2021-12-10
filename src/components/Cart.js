@@ -9,7 +9,7 @@ function Cart(props) {
 
   useEffect(() => {
     const getCart = async () => {
-      const response = await fetch(`/api/orders/users/1/cart`);
+      const response = await fetch(`/api/orders/users/${userState.id}/cart`);
       const data = await response.json();
       cartDispatch({ type: "SET_CART", value: data });
     };
@@ -23,7 +23,7 @@ function Cart(props) {
         <Link to="/">Continue Shopping</Link>
         <h3>Your Shopping Bag</h3>
         <br />
-        <h3>Order Total: </h3>
+        <h3>Order Total: ${total / 100}</h3>
         <br />
         <button>CHECKOUT</button>
       </div>
