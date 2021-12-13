@@ -170,6 +170,14 @@ async function usersData() {
   try {
     const users = [
       {
+        email: "admin",
+        phoneNumber: "1111111111",
+        password: "cutiecoconut",
+        firstName: "admin",
+        lastName: "admin",
+        isAdmin: true,
+      },
+      {
         email: "testuser",
         phoneNumber: "5041234567",
         password: "testuser999",
