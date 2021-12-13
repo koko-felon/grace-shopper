@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Nav from "./Nav";
 import SideBar from "./SideBar";
 import Footer from "./Footer";
+import AddToCart from "./AddToCart";
+import { Link } from "react-router-dom";
 
 function FoodDrink(props) {
   const [products, setProducts] = useState([]);
@@ -31,6 +33,8 @@ function FoodDrink(props) {
           <p>Qty In Stock: {product.productQuantity}</p>
           <p>MSRP: ${product.MSRP}</p>
           <p>SKU: {product.SKU}</p>
+          <AddToCart productId={product.id} />
+          <Link to={`/Product/${product.id}`}>Go to Product!</Link>
         </div>
       </>
     );
