@@ -30,6 +30,7 @@ function Products(props) {
           <AddToCart
             productId={product.id}
             currentPrice={product.currentPrice}
+            setProducts={setProducts}
           />
           <Link to={`/Product/${product.id}`}>Go to Product!</Link>
         </div>
