@@ -49,7 +49,6 @@ function Home(props) {
   return (
     <>
       <Nav />
-      <div></div>
       <Products />
       <SideBar />
       <Footer />

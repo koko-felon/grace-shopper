@@ -24,11 +24,11 @@ function Sidebar() {
     return (
       <>
         <div>
-          <h2>Product: {product.productName}</h2>
+          <h2>{product.productName}</h2>
           <img src={product.image} />
-          <p>Description: {product.productDescription}</p>
-          <p>Price: {product.currentPrice}</p>
-          <p>Quantity: {product.productQuantity}</p>
+          <p>{product.productDescription}</p>
+          <p>Price: ${product.currentPrice}</p>
+          <p>Qty In Stock: {product.productQuantity}</p>
           <p>MSRP: {product.MSRP}</p>
           <p>SKU: {product.SKU}</p>
         </div>
@@ -39,12 +39,13 @@ function Sidebar() {
   return (
     <>
       <Nav />
-      <h1>This is the sidebar!!!!!</h1>
+
       <h2>
-        <Link to="/ThisWeeksSteals">This Weeks Steals!</Link>
+        <Link to="/ThisWeeksSteals">
+          This Weeks Steals! Get em while they're hot!
+        </Link>
       </h2>
       {productsToRender}
-      <Footer />
     </>
   );
 }

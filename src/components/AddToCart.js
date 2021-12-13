@@ -13,7 +13,7 @@ function AddToCart(props) {
       body: JSON.stringify({
         orderId,
         productId,
-        histroicalPrice,
+        historicalPrice,
         quantity,
       }),
     });
