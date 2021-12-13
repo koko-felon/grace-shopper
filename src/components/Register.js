@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Nav from "./Nav";
 import Footer from "./Footer";
 import { useHistory, Link } from "react-router-dom";
+import { cartContext } from "../context/cartContext";
+import { userContext } from "../context/userContext";
 
 const Register = ({ setIsLoggedIn }) => {
+  const { cartState, cartDispatch } = useContext(cartContext);
   const history = useHistory();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -40,9 +43,20 @@ const Register = ({ setIsLoggedIn }) => {
       if (data.token) {
         setIsLoggedIn(true);
         setSuccessMessage("Welcome to your new Felons account!");
-        setTimeout(() => {
-          history.push("/");
-        }, 1500);
+        const response = await fetch(`/api/orders/users/${data.user.id}/cart`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const createdCart = await response.json();
+        console.log(createdCart);
+        cartDispatch({
+          type: "SET_CART",
+          value: createdCart,
+        });
+
+        history.push("/");
       } else {
         setErrorMessage(data.message);
       }

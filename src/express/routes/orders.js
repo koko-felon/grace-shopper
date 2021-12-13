@@ -5,6 +5,7 @@ const {
   getCart,
   updateOrder,
   deleteOrder,
+  createOrder,
 } = require("../db/orders");
 
 // GET SINGLE order by orderId
@@ -24,6 +25,15 @@ ordersRouter.get("/:id", async (req, res, next) => {
 ordersRouter.get("/users/:userId/cart", async (req, res, next) => {
   try {
     const cart = await getCart(req.params.userId);
+    res.send(cart);
+  } catch (error) {
+    next(error);
+  }
+});
+
+ordersRouter.post("/users/:userId/cart", async (req, res, next) => {
+  try {
+    const cart = await createOrder(req.params.userId);
     res.send(cart);
   } catch (error) {
     next(error);

@@ -9,15 +9,17 @@ function Cart(props) {
   const { cartState, cartDispatch } = useContext(cartContext);
   const { userState } = useContext(userContext);
 
-  // useEffect(() => {
-  //   const getCart = async () => {
-  //     const response = await fetch(`/api/orders/users/${userState.id}/cart`);
-  //     const data = await response.json();
-  //     cartDispatch({ type: "SET_CART", value: data });
-  //     console.log(data);
-  //   };
+  useEffect(() => {
+    const getCart = async () => {
+      const response = await fetch(`/api/orders/users/${userState.id}/cart`);
+      const data = await response.json();
+      cartDispatch({ type: "SET_CART", value: data });
+      console.log(data);
+    };
+    getCart();
+  }, []);
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
 
   const removeFromCart = async (productId, orderId) => {
     if (userState.id) {
