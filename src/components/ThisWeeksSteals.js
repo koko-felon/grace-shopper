@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Nav from "./Nav";
 import Footer from "./Footer";
+import AddToCart from "./AddToCart";
+import { Link } from "react-router-dom";
 
 function ThisWeeksSteals(props) {
   const [products, setProducts] = useState([]);
@@ -30,6 +32,8 @@ function ThisWeeksSteals(props) {
           <p>Quantity: {product.productQuantity}</p>
           <p>MSRP: {product.MSRP}</p>
           <p>SKU: {product.SKU}</p>
+          <AddToCart />
+          <Link to={`/Product/${product.id}`}>Go to Product!</Link>
         </div>
       </>
     );
