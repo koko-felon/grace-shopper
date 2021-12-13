@@ -83,6 +83,7 @@ usersRouter.post("/register", async (req, res, next) => {
     res.send({
       message: "Thank you for signing up",
       token,
+      user,
     });
   } catch (error) {
     console.error(error);

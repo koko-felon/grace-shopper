@@ -139,6 +139,20 @@ async function getCart(userId) {
   return orderArray[0];
 }
 
+async function createOrder(userId) {
+  const { rows } = await client.query(
+    `
+  INSERT INTO orders("userId", "salesTax", total)
+  VALUES ($1, $2, $3)
+ RETURNING *
+  `,
+    [userId, 9, 0]
+  );
+  const orderArray = mapTheRows(rows);
+  console.log("ORDER ARRYYYY", orderArray);
+  return orderArray[0];
+}
+
 async function updateOrder(id, fields = {}) {
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}"=$${index + 1}`)
@@ -182,4 +196,5 @@ module.exports = {
   getCart,
   updateOrder,
   deleteOrder,
+  createOrder,
 };

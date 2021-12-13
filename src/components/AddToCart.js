@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function AddToCart(props) {
+function AddToCart({ productId, currentPrice }) {
   const [cart, setCart] = useState([]);
 
   async function handleSubmit(e) {
@@ -13,8 +13,8 @@ function AddToCart(props) {
       body: JSON.stringify({
         orderId,
         productId,
-        histroicalPrice,
-        quantity,
+        historicalPrice: currentPrice,
+        productQuantity: 1,
       }),
     });
 

@@ -27,7 +27,10 @@ function Products(props) {
           <p>Qty In Stock: {product.productQuantity}</p>
           <p>MSRP: ${product.MSRP}</p>
           <p>SKU: {product.SKU}</p>
-          <AddToCart productId={product.id} />
+          <AddToCart
+            productId={product.id}
+            currentPrice={product.currentPrice}
+          />
           <Link to={`/Product/${product.id}`}>Go to Product!</Link>
         </div>
       </>
