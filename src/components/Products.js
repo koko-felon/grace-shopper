@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AddToCart from "./AddToCart";
+import { Link } from "react-router-dom";
 
 function Products(props) {
   const [products, setProducts] = useState([]);
@@ -27,6 +28,7 @@ function Products(props) {
           <p>MSRP: ${product.MSRP}</p>
           <p>SKU: {product.SKU}</p>
           <AddToCart productId={product.id} />
+          <Link to={`/Product/${product.id}`}>Go to Product!</Link>
         </div>
       </>
     );
