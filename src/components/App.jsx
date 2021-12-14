@@ -12,6 +12,7 @@ import Art from "./Art";
 import FoodDrink from "./FoodDrink";
 import Apparel from "./Apparel";
 
+import SingleProduct from "./SingleProduct";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -43,6 +44,9 @@ const App = () => {
           </Route>
           <Route path="/Apparel">
             <Apparel />
+          </Route>
+          <Route path="/Product/:id">
+            <SingleProduct />
           </Route>
         </Switch>
       </Router>

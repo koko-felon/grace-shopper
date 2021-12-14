@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import Nav from "./Nav";
 import SideBar from "./SideBar";
 import Footer from "./Footer";
+
 import { Card } from "react-bootstrap";
 import AddToCart from "./AddToCart";
+
+import { Link } from "react-router-dom";
 
 function Apparel(props) {
   const [products, setProducts] = useState([]);
@@ -24,7 +27,7 @@ function Apparel(props) {
   const productsToRender = productsToFilter.map((product) => {
     return (
       <>
-        <div className="apparelProducts">
+        {/* <div className="apparelProducts">
           <Card style={{ width: "18rem" }}>
             <Card.Img variant="top" src={product.image} />
             <Card.Body>
@@ -38,7 +41,17 @@ function Apparel(props) {
               </Card.Text>
               <AddToCart variant="primary" productId={product.id} />
             </Card.Body>
-          </Card>
+          </Card> */}
+        <div>
+          <h2>{product.productName}</h2>
+          <img src={product.image} />
+          <p>{product.productDescription}</p>
+          <p>Our Price: ${product.currentPrice}</p>
+          <p>Qty In Stock: {product.productQuantity}</p>
+          <p>MSRP: ${product.MSRP}</p>
+          <p>SKU: {product.SKU}</p>
+          <AddToCart productId={product.id} />
+          <Link to={`/Product/${product.id}`}>Go to Product!</Link>
         </div>
       </>
     );

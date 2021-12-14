@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Nav from "./Nav";
-import Footer from "./Footer";
+import AddToCart from "./AddToCart";
 
 function Sidebar() {
   const [products, setProducts] = useState([]);
@@ -31,6 +31,8 @@ function Sidebar() {
           <p>Qty In Stock: {product.productQuantity}</p>
           <p>MSRP: {product.MSRP}</p>
           <p>SKU: {product.SKU}</p>
+          <AddToCart productId={product.id} />
+          <Link to={`/Product/${product.id}`}>Go to Product!</Link>
         </div>
       </>
     );
@@ -38,8 +40,7 @@ function Sidebar() {
 
   return (
     <>
-      <Nav />
-
+      <h1>This is the sidebar!!!!!</h1>
       <h2>
         <Link to="/ThisWeeksSteals">
           This Weeks Steals! Get em while they're hot!

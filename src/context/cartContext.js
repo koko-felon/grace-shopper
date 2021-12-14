@@ -14,6 +14,33 @@ const CartProvider = ({ children }) => {
       case "CLEAR_CART": {
         return {};
       }
+      case "ADD_TO_CART": {
+        const newState = {
+          products: [...oldState.products, action.value],
+        };
+        return newState;
+      }
+      case "REMOVE_FROM_CART": {
+        const newProducts = oldState.products.filter(
+          (product) => product.productId !== action.value.productId
+        );
+        const newState = {
+          products: [...newProducts],
+        };
+        return newState;
+      }
+      case "CHANGE_QTY": {
+        const newProducts = oldState.products.map((product) => {
+          if (product.productId === action.value.productId) {
+            product.productQuantity = action.value.productQuantity;
+          }
+          return product;
+        });
+        const newState = {
+          products: [...newProducts],
+        };
+        return newState;
+      }
 
       default:
         throw new Error();
