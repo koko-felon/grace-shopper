@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import AddToCart from './AddToCart'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect, useContext } from "react";
+import AddToCart from "./AddToCart";
+import RemoveFromCart from "./RemoveFromCart";
+import { cartContext } from "../context/cartContext";
+import { Link } from "react-router-dom";
 
 function Products(props) {
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([]);
+  const { cartState, cartDispatch } = useContext(cartContext);
 
   useEffect(() => {
     const getProducts = async () => {
-      const response = await fetch(`/api/products`)
-      const data = await response.json()
-      setProducts(data)
-    }
+      const response = await fetch(`/api/products`);
+      const data = await response.json();
+      setProducts(data);
+    };
 
-    getProducts()
-  }, [])
+    getProducts();
+  }, []);
 
   const productsToRender = products.map((product) => {
     return (
@@ -30,24 +33,38 @@ function Products(props) {
           {
             // If the cartState.products array contains a product with this product's id
             // we can conditianlly render a message saying it's already in the cart
+            // DONE :D
           }
-          <AddToCart
-            productId={product.id}
-            currentPrice={product.currentPrice}
-            setProducts={setProducts}
-          />
+          {cartState.products ? (
+            cartState.products.filter((item) => item.productId === product.id)
+              .length === 0 ? (
+              <AddToCart
+                productId={product.id}
+                currentPrice={product.currentPrice}
+                setProducts={setProducts}
+              />
+            ) : (
+              <p>Added to Cart!</p>
+            )
+          ) : (
+            <AddToCart
+              productId={product.id}
+              currentPrice={product.currentPrice}
+              setProducts={setProducts}
+            />
+          )}
           <Link to={`/Product/${product.id}`}>Go to Product!</Link>
         </div>
       </>
-    )
-  })
+    );
+  });
 
   return (
     <>
       <h2>Welcome to your ultimate Coco HQ - Go Nuts!</h2>
       <div>{productsToRender}</div>
     </>
-  )
+  );
 }
 
-export default Products
+export default Products;

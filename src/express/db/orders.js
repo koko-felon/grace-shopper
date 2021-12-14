@@ -1,5 +1,5 @@
-const { route } = require('../routes/orders')
-const { client } = require('./index')
+const { route } = require("../routes/orders");
+const { client } = require("./index");
 
 async function getAllOrders() {
   const { rows } = await client.query(
@@ -7,13 +7,13 @@ async function getAllOrders() {
     SELECT *
     FROM orders;
     `
-  )
+  );
 
-  return rows
+  return rows;
 }
 
 function mapTheRows(rows) {
-  const mappedOrders = {}
+  const mappedOrders = {};
 
   for (const row of rows) {
     if (!mappedOrders[row.id]) {
@@ -27,7 +27,7 @@ function mapTheRows(rows) {
         isActive: row.isActive,
         paymentDate: row.paymentDate,
         products: [],
-      }
+      };
       if (row.productId) {
         mappedOrders[row.id].products.push({
           productId: row.productId,
@@ -41,7 +41,7 @@ function mapTheRows(rows) {
           productQuantity: row.productQuantity,
           MSRP: row.MSRP,
           image: row.image,
-        })
+        });
       }
     } else {
       if (row.productId) {
@@ -57,11 +57,11 @@ function mapTheRows(rows) {
           productQuantity: row.productQuantity,
           MSRP: row.MSRP,
           image: row.image,
-        })
+        });
       }
     }
   }
-  return Object.values(mappedOrders)
+  return Object.values(mappedOrders);
 }
 
 async function getOrderById(orderId) {
@@ -95,14 +95,14 @@ ON order_products."productId" = products.id
     WHERE orders.id= $1;
         `,
     [orderId]
-  )
+  );
 
-  const orderArray = mapTheRows(rows)
-  return orderArray[0]
+  const orderArray = mapTheRows(rows);
+  return orderArray[0];
 }
 
 async function getCart(userId) {
-  console.log('INSIDE GET CART DB METHOD')
+  console.log("INSIDE GET CART DB METHOD");
   const { rows } = await client.query(
     `
     SELECT 
@@ -134,11 +134,11 @@ async function getCart(userId) {
     WHERE orders."userId" = $1 and orders."isActive" = true
     `,
     [userId]
-  )
+  );
 
-  const orderArray = mapTheRows(rows)
-  console.log(orderArray)
-  return orderArray[0]
+  const orderArray = mapTheRows(rows);
+  console.log(orderArray);
+  return orderArray[0];
 }
 
 async function createOrder(userId) {
@@ -149,16 +149,16 @@ async function createOrder(userId) {
  RETURNING *
   `,
     [userId, 9, 0, true]
-  )
-  const orderArray = mapTheRows(rows)
-  console.log('ORDER ARRYYYY', orderArray)
-  return orderArray[0]
+  );
+  const orderArray = mapTheRows(rows);
+  console.log("ORDER ARRYYYY", orderArray);
+  return orderArray[0];
 }
 
 async function updateOrder(id, fields = {}) {
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}"=$${index + 1}`)
-    .join(', ')
+    .join(", ");
 
   try {
     if (setString.length > 0) {
@@ -170,11 +170,11 @@ async function updateOrder(id, fields = {}) {
         RETURNING *;
       `,
         Object.values(fields)
-      )
+      );
     }
-    return getOrderById(id)
+    return getOrderById(id);
   } catch (error) {
-    throw error
+    throw error;
   }
 }
 
@@ -187,9 +187,9 @@ async function deleteOrder(orderId) {
     WHERE id= $1
     `,
     [orderId]
-  )
+  );
 
-  return order
+  return order;
 }
 
 module.exports = {
@@ -199,4 +199,4 @@ module.exports = {
   updateOrder,
   deleteOrder,
   createOrder,
-}
+};
