@@ -7,7 +7,7 @@ function AddToCart({ productId, currentPrice, setProducts }) {
 
   const { userState, userDispatch } = useContext(userContext);
   const { cartState, cartDispatch } = useContext(cartContext);
-  console.log(userState);
+  console.log({ userState, cartState });
   async function handleSubmit(e) {
     e.preventDefault();
     const response = await fetch("/api/order_products", {
@@ -19,20 +19,16 @@ function AddToCart({ productId, currentPrice, setProducts }) {
         orderId: cartState.orderId,
         productId,
         historicalPrice: currentPrice,
-        productQuantity: 1,
+        quantity: 1,
       }),
     });
-    // Import userContext and set that stuff up
-    // make a fetch getting the user's cart
-    // import cartContext and stuff
-    // dispatch({ type: 'SET_CART, value: the cart from the fetch})
-
     const data = await response.json();
     console.log(data);
     const responseTwo = await fetch(`
-    /api/orders/user/${userState.id}/cart
+    /api/orders/users/${userState.id}/cart
     `);
     const dataTwo = await responseTwo.json();
+    console.log({ dataTwo });
     cartDispatch({
       type: "SET_CART",
       value: dataTwo,

@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import AddToCart from "./AddToCart";
 import { Card } from "react-bootstrap";
+import RemoveFromCart from "./RemoveFromCart";
+import { cartContext } from "../context/cartContext";
 import { Link } from "react-router-dom";
 
 function Products(props) {
   const [products, setProducts] = useState([]);
+  const { cartState, cartDispatch } = useContext(cartContext);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -43,11 +46,29 @@ function Products(props) {
           <p>Qty In Stock: {product.productQuantity}</p>
           <p>MSRP: ${product.MSRP}</p>
           <p>SKU: {product.SKU}</p>
-          <AddToCart
-            productId={product.id}
-            currentPrice={product.currentPrice}
-            setProducts={setProducts}
-          />
+          {
+            // If the cartState.products array contains a product with this product's id
+            // we can conditianlly render a message saying it's already in the cart
+            // DONE :D
+          }
+          {cartState.products ? (
+            cartState.products.filter((item) => item.productId === product.id)
+              .length === 0 ? (
+              <AddToCart
+                productId={product.id}
+                currentPrice={product.currentPrice}
+                setProducts={setProducts}
+              />
+            ) : (
+              <p>Added to Cart!</p>
+            )
+          ) : (
+            <AddToCart
+              productId={product.id}
+              currentPrice={product.currentPrice}
+              setProducts={setProducts}
+            />
+          )}
           <Link to={`/Product/${product.id}`}>Go to Product!</Link>
         </div>
       </>

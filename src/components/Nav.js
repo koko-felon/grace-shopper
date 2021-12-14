@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { userContext } from "../context/userContext";
+import { cartContext } from "../context/cartContext";
 
 import {
   Container,
@@ -18,6 +19,7 @@ import { CartProvider } from "../context/cartContext";
 
 function Nav() {
   const { userState, userDispatch } = useContext(userContext);
+  const { cartState, cartDispatch } = useContext(cartContext);
   const token = localStorage.getItem("token");
   // const {
   //   state: { cart },
@@ -28,6 +30,7 @@ function Nav() {
   const logout = () => {
     localStorage.clear("token");
     userDispatch({ type: "LOG_OUT", value: null });
+    cartDispatch({ type: "CLEAR_CART", value: null });
   };
 
   return (
