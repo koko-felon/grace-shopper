@@ -102,6 +102,7 @@ ON order_products."productId" = products.id
 }
 
 async function getCart(userId) {
+  console.log("INSIDE GET CART DB METHOD");
   const { rows } = await client.query(
     `
     SELECT 
@@ -136,17 +137,18 @@ async function getCart(userId) {
   );
 
   const orderArray = mapTheRows(rows);
+  console.log(orderArray);
   return orderArray[0];
 }
 
 async function createOrder(userId) {
   const { rows } = await client.query(
     `
-  INSERT INTO orders("userId", "salesTax", total)
-  VALUES ($1, $2, $3)
+  INSERT INTO orders("userId", "salesTax", total, "isActive")
+  VALUES ($1, $2, $3, $4)
  RETURNING *
   `,
-    [userId, 9, 0]
+    [userId, 9, 0, true]
   );
   const orderArray = mapTheRows(rows);
   console.log("ORDER ARRYYYY", orderArray);

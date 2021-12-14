@@ -2,14 +2,17 @@ import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { userContext } from "../context/userContext";
+import { cartContext } from "../context/cartContext";
 
 function Nav() {
   const { userState, userDispatch } = useContext(userContext);
+  const { cartState, cartDispatch } = useContext(cartContext);
   const token = localStorage.getItem("token");
 
   const logout = () => {
     localStorage.clear("token");
     userDispatch({ type: "LOG_OUT", value: null });
+    cartDispatch({ type: "CLEAR_CART", value: null });
   };
 
   return (

@@ -37,7 +37,11 @@ function SingleProduct() {
         <p>Qty In Stock: {product.productQuantity}</p>
         <p>MSRP: ${product.MSRP}</p>
         <p>SKU: {product.SKU}</p>
-        <AddToCart productId={product.id} />
+        <AddToCart
+          productId={product.id}
+          currentPrice={product.currentPrice}
+          setProducts={setProducts}
+        />
         {userState.isAdmin ? (
           <>
             <UpdateProduct setProduct={setProduct} />

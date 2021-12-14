@@ -24,9 +24,12 @@ order_productsRouter.patch("/", async (req, res, next) => {
   }
 });
 
-order_productsRouter.delete("/", async (req, res, next) => {
+order_productsRouter.delete("/:orderId/:productId", async (req, res, next) => {
   try {
-    const removedFromCart = await removeFromCart(req.body);
+    const removedFromCart = await removeFromCart({
+      productId: req.params.productId,
+      orderId: req.params.orderId,
+    });
 
     res.send(removedFromCart);
   } catch (error) {
