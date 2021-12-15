@@ -6,6 +6,8 @@ import { App } from "./components";
 import { UserProvider } from "./context/userContext";
 import { CartProvider } from "./context/cartContext";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 ReactDOM.render(
   <React.StrictMode>
     <UserProvider>

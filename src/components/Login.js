@@ -46,7 +46,7 @@ const Login = ({ setIsLoggedIn }) => {
   return (
     <>
       <Nav />
-      <div className="login">
+      <div className="loginPage">
         <h2>Welcome Back Felon!</h2>
         <br />
         {errorMessage ? <h4>{errorMessage}</h4> : null}
@@ -76,11 +76,11 @@ const Login = ({ setIsLoggedIn }) => {
           <input type="submit" value="Sign In" />
         </form>
         <br />
-        <h3>
+        <h5>
           Don't have an account yet?
           <br />
           <Link to="/Register">Click here to get you set up!</Link>
-        </h3>
+        </h5>
         <br />
       </div>
 

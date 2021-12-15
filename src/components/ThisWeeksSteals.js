@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Nav from "./Nav";
 import Footer from "./Footer";
 import AddToCart from "./AddToCart";
 import { Link } from "react-router-dom";
+import { Card } from "react-bootstrap";
+import { cartContext } from "../context/cartContext";
 
 function ThisWeeksSteals(props) {
   const [products, setProducts] = useState([]);
+  const { cartState, cartDispatch } = useContext(cartContext);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -24,8 +27,42 @@ function ThisWeeksSteals(props) {
   const productsToRender = productsToFilter.map((product) => {
     return (
       <>
-        <div>
-          <h2>Product: {product.productName}</h2>
+        <div className="Steals">
+          <Card style={{ width: "22rem" }}>
+            <Card.Img variant="top" src={product.image} />
+            <Card.Body>
+              <Card.Title class="prodName">{product.productName}</Card.Title>
+              <Card.Text>
+                <p>{product.productDescription}</p>
+                <p>Our Price: ${product.currentPrice / 100}</p>
+                <p>Qty In Stock: {product.productQuantity}</p>
+                <p>MSRP: ${product.MSRP / 100}</p>
+                <p>SKU: {product.SKU}</p>
+              </Card.Text>
+              {cartState.products ? (
+                cartState.products.filter(
+                  (item) => item.productId === product.id
+                ).length === 0 ? (
+                  <AddToCart
+                    variant="primary"
+                    productId={product.id}
+                    currentPrice={product.currentPrice}
+                    setProducts={setProducts}
+                  />
+                ) : (
+                  <p>Added to Cart!</p>
+                )
+              ) : (
+                <AddToCart
+                  productId={product.id}
+                  currentPrice={product.currentPrice}
+                  setProducts={setProducts}
+                />
+              )}
+              <Link to={`/Product/${product.id}`}>View Product</Link>
+            </Card.Body>
+          </Card>
+          {/* <h2>Product: {product.productName}</h2>
           <img src={product.image} />
           <p>Description: {product.productDescription}</p>
           <p>Price: {product.currentPrice}</p>
@@ -33,7 +70,7 @@ function ThisWeeksSteals(props) {
           <p>MSRP: {product.MSRP}</p>
           <p>SKU: {product.SKU}</p>
           <AddToCart />
-          <Link to={`/Product/${product.id}`}>Go to Product!</Link>
+          <Link to={`/Product/${product.id}`}>Go to Product!</Link> */}
         </div>
       </>
     );
@@ -42,8 +79,8 @@ function ThisWeeksSteals(props) {
   return (
     <>
       <Nav />
-      <h1>THIS WEEKS STEALS!</h1>
-      {productsToRender}
+      <h2>THIS WEEK'S STEALS!</h2>
+      <div className="productContainer">{productsToRender}</div>
       <Footer />
     </>
   );

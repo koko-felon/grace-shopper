@@ -1,13 +1,33 @@
 import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { userContext } from "../context/userContext";
 import { cartContext } from "../context/cartContext";
+
+import {
+  Container,
+  Dropdown,
+  FormControl,
+  Navbar,
+  Header,
+  Badge,
+  Button,
+} from "react-bootstrap";
+import { HiOutlineShoppingBag } from "react-icons/hi";
+
+import { CartProvider } from "../context/cartContext";
+import Products from "./Products";
+import "./styles.css";
 
 function Nav() {
   const { userState, userDispatch } = useContext(userContext);
   const { cartState, cartDispatch } = useContext(cartContext);
   const token = localStorage.getItem("token");
+  // const {
+  //   state: { cart },
+  //   dispatch,
+  //   productDispatch,
+  // } = CartProvider();
 
   const logout = () => {
     localStorage.clear("token");
@@ -16,25 +36,65 @@ function Nav() {
   };
 
   return (
-    <div>
-      {token ? <h3>Welcome Back, {userState.firstName}</h3> : null}
-      <Link to="/">Home</Link>
-      <div>
-        {!token ? (
-          <>
-            <Link to="/Login">Login /</Link>
-            <Link to="/Register"> Register</Link>
-          </>
-        ) : (
-          <button onClick={logout}>Logout</button>
-        )}
-        <Link to="/Cart">Add Cart Logo</Link>
-      </div>
+    <Navbar style={{ height: 120 }}>
+      <Container>
+        <div className="anim">
+          <Link id="header" class="text-white" to="/">
+            <h1>Coco Felons</h1>
+          </Link>
+        </div>
+        <Navbar.Text className="search">
+          <FormControl
+            style={{ width: 200 }}
+            type="search"
+            placeholder="Search the goods"
+            className="m-auto"
+            aria-label="Search"
+          />
+        </Navbar.Text>
 
-      <Link to="/Art">Art</Link>
-      <Link to="/FoodDrink">Food & Drink</Link>
-      <Link to="/Apparel">Apparel</Link>
-    </div>
+        <div class="text-white">
+          {token ? <h5>Hello, {userState.firstName}!</h5> : null}
+          <div>
+            {!token ? (
+              <>
+                <Link class="text-white" to="/Login">
+                  Sign In /
+                </Link>
+                <Link class="text-white" to="/Register">
+                  {" "}
+                  Register
+                </Link>
+              </>
+            ) : (
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+                onClick={logout}
+              >
+                Log Out
+              </button>
+            )}
+            <Link to="/Cart"></Link>
+          </div>
+
+          <Link id="categoryNav" class="text-white" to="/Art">
+            Art
+          </Link>
+          <Link id="categoryNav" class="text-white" to="/FoodDrink">
+            Food & Drink
+          </Link>
+          <Link id="categoryNav" class="text-white" to="/Apparel">
+            Apparel
+          </Link>
+        </div>
+
+        <Link to="/cart">
+          <HiOutlineShoppingBag alignright="true" color="white" size="40px" />
+          {/* <Badge class="text-white">{Products.length}</Badge> */}
+        </Link>
+      </Container>
+    </Navbar>
   );
 }
 

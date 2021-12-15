@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import Nav from "./Nav";
 import AddToCart from "./AddToCart";
+import { Card } from "react-bootstrap";
+import { cartContext } from "../context/cartContext";
+import { userContext } from "../context/userContext";
+import "./styles.css";
 
 function Sidebar() {
   const [products, setProducts] = useState([]);
+  const { cartState, cartDispatch } = useContext(cartContext);
+  const { userState, userDispatch } = useContext(userContext);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -23,32 +28,73 @@ function Sidebar() {
   const productsToRender = productsToFilter.map((product) => {
     return (
       <>
-        <div>
-          <h2>Product: {product.productName}</h2>
+        <div className="sidebarProducts">
+          <Card style={{ width: "auto" }}>
+            <Card.Img variant="top" src={product.image} />
+            <Card.Body>
+              <Card.Title className="prodName1" class="text-white">
+                {product.productName}
+              </Card.Title>
+              <Card.Text>
+                <p>${product.currentPrice / 100}</p>
+
+                <p>MSRP: ${product.MSRP / 100}</p>
+                <p>SKU: {product.SKU}</p>
+              </Card.Text>
+              {cartState.products ? (
+                cartState.products.filter(
+                  (item) => item.productId === product.id
+                ).length === 0 ? (
+                  <AddToCart
+                    variant="primary"
+                    productId={product.id}
+                    currentPrice={product.currentPrice}
+                    setProducts={setProducts}
+                  />
+                ) : (
+                  <p>Added to Cart!</p>
+                )
+              ) : (
+                <AddToCart
+                  productId={product.id}
+                  currentPrice={product.currentPrice}
+                  setProducts={setProducts}
+                />
+              )}
+              <Link to={`/Product/${product.id}`}>View Product</Link>
+            </Card.Body>
+          </Card>
+        </div>
+        {/* <div className="sidebarProducts">
+          <h2>{product.productName}</h2>
           <img src={product.image} />
-          <p>Description: {product.productDescription}</p>
-          <p>Price: {product.currentPrice}</p>
-          <p>Quantity: {product.productQuantity}</p>
-          <p>MSRP: {product.MSRP}</p>
+
+          <p>Our Price: ${product.currentPrice / 100}</p>
+
+          <p>MSRP: ${product.MSRP / 100}</p>
           <p>SKU: {product.SKU}</p>
           <AddToCart
             productId={product.id}
             currentPrice={product.currentPrice}
             setProducts={setProducts}
           />
-          <Link to={`/Product/${product.id}`}>Go to Product!</Link>
-        </div>
+          <Link to={`/Product/${product.id}`}>View Product!</Link>
+        </div> */}
       </>
     );
   });
 
   return (
     <>
-      <h1>This is the sidebar!!!!!</h1>
-      <h2>
-        <Link to="/ThisWeeksSteals">This Weeks Steals!</Link>
-      </h2>
-      {productsToRender}
+      <div className="sidebarContainer">
+        <span className="stealsLink">
+          <Link to="/ThisWeeksSteals">
+            This Week's Steals! Get em while they're hot!
+          </Link>
+
+          <div className="productContainer">{productsToRender}</div>
+        </span>
+      </div>
     </>
   );
 }

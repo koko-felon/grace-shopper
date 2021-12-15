@@ -4,6 +4,7 @@ import { cartContext } from "../context/cartContext";
 import { userContext } from "../context/userContext";
 import axios from "axios";
 import RemoveFromCart from "./RemoveFromCart";
+import Checkout from "./Checkout";
 
 function Cart(props) {
   const { cartState, cartDispatch } = useContext(cartContext);
@@ -96,16 +97,12 @@ function Cart(props) {
     cartState.products.map((product) => {
       return (
         <>
-          <div key={product.productId}>
-            <img src={product.imageUrl} />
-            <h3>{product.productName}</h3>
+          <div class="cartitem" key={product.productId}>
+            <img id="cartItemImg" class="img-thumbnail" src={product.image} />
+            <h5>{product.productName}</h5>
             <h5>Price: ${product.currentPrice / 100}</h5>
-            <h5>Quantity: {product.quantity}</h5>
-            <h4>
-              Product Total: ${(product.currentPrice * product.quantity) / 100}
-            </h4>
-            <RemoveFromCart productId={product.productId} />
-            <span>QTY</span>
+            <h5>Qty: {product.quantity}</h5>
+            <span>Update Qty</span>
             <button
               onClick={() =>
                 increaseQty(product.productId, product.quantity + 1)
@@ -120,6 +117,10 @@ function Cart(props) {
             >
               -
             </button>
+            <h5>
+              Product Total: ${(product.currentPrice * product.quantity) / 100}
+            </h5>
+            <RemoveFromCart productId={product.productId} />
           </div>
         </>
       );
@@ -136,14 +137,14 @@ function Cart(props) {
 
   return (
     <>
-      <div>
+      <div className="cart">
         <Link to="/">Continue Shopping</Link>
-        <h3>Your Shopping Bag</h3>
+        <h3 className="bag">Your Shopping Bag</h3>
         <br />
-        {products ? products : <span>Nothing in Your Cart!</span>}
-        <h3>Order Total: ${total / 100}</h3>
+        {products ? products : <span>Nothing in your bag!</span>}
+        <h3 className="total">Order Total: ${total / 100}</h3>
         <br />
-        <button>CHECKOUT</button>
+        <Link to="/Checkout">Proceed to CHECKOUT</Link>
       </div>
     </>
   );

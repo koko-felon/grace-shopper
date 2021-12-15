@@ -71,7 +71,7 @@ const Register = ({ setIsLoggedIn }) => {
         <br />
         {errorMessage ? <h4>{errorMessage}</h4> : null}
         {successMessage ? <h4>{successMessage}</h4> : null}
-        <form className="loginForm" onSubmit={handleSubmit}>
+        <form className="registerForm" onSubmit={handleSubmit}>
           <label>
             <input
               type="text"
@@ -147,11 +147,11 @@ const Register = ({ setIsLoggedIn }) => {
           <input type="submit" value="Submit" />
         </form>
         <br />
-        <h3>
+        <h5>
           Already have an account?
           <br />
           <Link to="/Login">Click here to sign in!</Link>
-        </h3>
+        </h5>
         <br />
       </div>
       <Footer />
