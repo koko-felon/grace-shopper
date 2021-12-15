@@ -1,25 +1,211 @@
 /* header styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Permanent+Marker&display=swap");
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: "Permanent Marker", cursive;
+  background-color: rgb(206, 215, 219) !important;
+}
+
+.home {
+  display: block;
+}
+
+img {
+  align-self: center;
+  width: 100%;
+  height: 60vh;
+  /* object-fit: cover; */
+}
+
+/* .anim {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    z-index: 1;
+    background-color: black;
+    animation: showText 0.8s ease;
+  }
+
+  h1 {
+    opacity: 0;
+    animation: animateText 0.7s forwards;
+  }
+}
+
+@keyframes animateText {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes showText {
+  0% {
+    width: 0;
+    left: 0;
+  }
+  50% {
+    width: 100%;
+    left: 0;
+  }
+  100% {
+    width: 0;
+    left: 0;
+  }
+} */
+
+#header {
+  font-family: "Permanent Marker", cursive !important;
+}
 
 .navbar {
   display: block;
   text-align: center;
-
-  margin: 10px 0;
+  background: linear-gradient(to bottom, #9bbdce 0, #100f24 100%);
+  position: fixed;
+  left: 0;
+  right: 0;
+  overflow: auto;
 }
-.bg-navbar {
-  background: linear-gradient(to bottom, #9bbdce 0, #020202 100%);
+
+#categoryNav {
+  position: relative;
 }
 
+.sidebarContainer {
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+  padding: 5px;
+  display: flex;
+  flex-direction: flex-end;
+  width: 20%;
+  margin: 0;
+  height: auto;
+}
+
+#navBar {
+  width: 300px;
+  height: 100vh;
+  right: 0;
+  background-color: darkgrey;
+  color: whitesmoke;
+}
+
+.loginPage,
+.register,
+.singleProduct {
+  display: block;
+  text-align: center;
+  position: relative;
+  margin: 50px auto;
+}
+
+.singleProduct {
+  margin-left: 30%;
+  height: 400px;
+}
+
+.singleprodName {
+  font-family: "Permanent Marker", cursive !important;
+  font-size: 1.5rem;
+}
+
+.loginPage input,
+.register input {
+  margin-bottom: 15px;
+  font-size: 18px;
+  width: 300px;
+  height: 30px;
+  text-align: center;
+  border: 1px solid rgb(37, 122, 156);
+}
+
+.Checkout {
+  display: block;
+  text-align: center;
+  position: relative;
+  margin: 20px auto;
+}
+
+.Checkout input {
+  margin-bottom: 5px;
+  font-size: 18px;
+  width: 300px;
+  height: 30px;
+  text-align: center;
+  border: 1px solid rgb(37, 122, 156);
+}
+
+h2 {
+  text-align: center;
+  font-family: "Permanent Marker", cursive !important;
+}
+
+.card {
+  float: left;
+}
+
+.cardbody {
+  background-color: rgb(241, 236, 236);
+  padding: 5px;
+}
+
+.bag,
+.total {
+  font-family: "Permanent Marker", cursive !important;
+  font-size: 1.5rem;
+  /* text-align: center; */
+}
+
+.prodName {
+  font-family: "Permanent Marker", cursive !important;
+  font-size: 1.3rem;
+}
+
+.image-fluid {
+  max-width: 100%;
+  height: 20vh;
+}
+.embed-responsive .card-img-top {
+  width: 100%;
+  height: 300px;
+}
+
+.productContainer {
+  display: flex;
+  width: auto;
+  padding: 5px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
 .cartitem {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 20px;
+  margin: 0 50px;
   margin-bottom: 20px;
 }
 
-.cartItemImg {
-  border-radius: 50%;
+#cartItemImg {
+  border-radius: 25%;
   width: 50px;
   height: 50px;
   object-fit: cover;
@@ -28,78 +214,32 @@
 .cartItemDetail {
   display: flex;
   flex: 1;
-  padding: 0 20px;
+  padding: 0 10px;
   flex-direction: column;
 }
 
-/* Home Page */
+#categoryNav {
+  padding: 15px;
+}
 
-.home {
+.footer {
+  background: linear-gradient(to bottom, #65767e 0, #100f24 100%);
+  /* box-sizing: border-box; */
+  position: fixed;
+  height: 68px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.footer h6 {
+  display: inline-block;
+  padding: 15px;
+  padding-bottom: 1px;
+  padding-top: 2px;
+}
+.socialLogos {
   display: flex;
-}
-
-.filters {
-  background-color: #343a40;
-  color: white;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  width: 20%;
-  margin: 10px;
-  height: 86vh;
-}
-
-.filters > span {
-  padding-bottom: 20px;
-}
-
-/* .title {
-  font-size: 30px;
-} */
-
-.productContainer {
-  display: flex;
-  width: 78%;
-  padding: 20px;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-.products {
-  width: 30%;
-  margin: 10px;
-}
-
-.summary {
-  width: 30%;
-}
-
-/* Media Queries */
-@media (max-width: 771px) {
-  .filters {
-    width: 40%;
-    padding: 10px;
-    margin: 5px;
-  }
-
-  .filters > span {
-    font-size: 10px;
-  }
-
-  .title {
-    font-size: 18px !important;
-  }
-
-  .productContainer {
-    width: 58%;
-    padding: 0;
-  }
-
-  /* .search {
-    display: none !important;
-  } */
-
-  .products {
-    width: 100%;
-  }
+  justify-content: space-evenly;
 }

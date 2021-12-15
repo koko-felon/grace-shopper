@@ -8,6 +8,7 @@ import SideBar from "./SideBar";
 import axios from "axios";
 
 import { userContext } from "../context/userContext";
+import "../components/styles.css";
 
 function Home(props) {
   const { userState, userDispatch } = useContext(userContext);
@@ -48,10 +49,12 @@ function Home(props) {
 
   return (
     <>
-      <Nav />
-      <Products />
-      <SideBar />
-      <Footer />
+      <div className="home">
+        <Nav />
+        <Products />
+        <SideBar />
+        <Footer />
+      </div>
     </>
   );
 }

@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { userContext } from "../context/userContext";
 import { cartContext } from "../context/cartContext";
 
-function AddToCart({ productId, currentPrice, setProducts }) {
+function AddToCart({ productId, currentPrice, setProducts, setProduct }) {
   const [cart, setCart] = useState([]);
 
   const { userState, userDispatch } = useContext(userContext);
@@ -37,7 +37,7 @@ function AddToCart({ productId, currentPrice, setProducts }) {
 
   return (
     <div>
-      <button onClick={handleSubmit}>Add to Cart!</button>
+      <button onClick={handleSubmit}>Add to Cart</button>
     </div>
   );
 }

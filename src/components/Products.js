@@ -22,36 +22,57 @@ function Products(props) {
   const productsToRender = products.map((product) => {
     return (
       <>
-        {/* <div className="products"> */}
-        {/* <Card style={{ width: "18rem" }}>
+        <div className="products">
+          <Card style={{ width: "18rem" }}>
             <Card.Img variant="top" src={product.image} />
             <Card.Body>
-              <Card.Title>{product.productName}</Card.Title>
+              <Card.Title class="prodName">{product.productName}</Card.Title>
               <Card.Text>
                 <p>{product.productDescription}</p>
-                <p>Our Price: ${product.currentPrice}</p>
+                <p>Our Price: ${product.currentPrice / 100}</p>
                 <p>Qty In Stock: {product.productQuantity}</p>
-                <p>MSRP: ${product.MSRP}</p>
+                <p>MSRP: ${product.MSRP / 100}</p>
                 <p>SKU: {product.SKU}</p>
               </Card.Text>
-              <AddToCart variant="primary" productId={product.id} />
+              {cartState.products ? (
+                cartState.products.filter(
+                  (item) => item.productId === product.id
+                ).length === 0 ? (
+                  <AddToCart
+                    variant="primary"
+                    productId={product.id}
+                    productId={product.id}
+                    currentPrice={product.currentPrice}
+                    setProducts={setProducts}
+                  />
+                ) : (
+                  <p>Added to Cart!</p>
+                )
+              ) : (
+                <AddToCart
+                  productId={product.id}
+                  currentPrice={product.currentPrice}
+                  setProducts={setProducts}
+                />
+              )}
+              <Link to={`/Product/${product.id}`}>View Product</Link>
             </Card.Body>
-          </Card> */}
-        <div>
+          </Card>
+          {/* <div>
           <h2>{product.productName}</h2>
-          {/*I know Image is not <p> just for testing purposes*/}
+
           <img src={product.image} />
           <p>{product.productDescription}</p>
           <p>Our Price: ${product.currentPrice}</p>
           <p>Qty In Stock: {product.productQuantity}</p>
           <p>MSRP: ${product.MSRP}</p>
-          <p>SKU: {product.SKU}</p>
+          <p>SKU: {product.SKU}</p> */}
           {
             // If the cartState.products array contains a product with this product's id
             // we can conditianlly render a message saying it's already in the cart
             // DONE :D
           }
-          {cartState.products ? (
+          {/* {cartState.products ? (
             cartState.products.filter((item) => item.productId === product.id)
               .length === 0 ? (
               <AddToCart
@@ -69,7 +90,7 @@ function Products(props) {
               setProducts={setProducts}
             />
           )}
-          <Link to={`/Product/${product.id}`}>Go to Product!</Link>
+          <Link to={`/Product/${product.id}`}>View Product!</Link> */}
         </div>
       </>
     );
@@ -78,7 +99,7 @@ function Products(props) {
   return (
     <>
       <h2>Welcome to your ultimate Coco HQ - Go Nuts!</h2>
-      {productsToRender}
+      <div className="productContainer">{productsToRender}</div>
     </>
   );
 }

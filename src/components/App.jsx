@@ -11,8 +11,12 @@ import Cart from "./Cart";
 import Art from "./Art";
 import FoodDrink from "./FoodDrink";
 import Apparel from "./Apparel";
+import Checkout from "./Checkout";
 
 import SingleProduct from "./SingleProduct";
+
+import "./styles.css"
+
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -44,6 +48,9 @@ const App = () => {
           </Route>
           <Route path="/Apparel">
             <Apparel />
+          </Route>
+          <Route path="/Checkout">
+            <Checkout setIsLoggedIn={setIsLoggedIn}/>
           </Route>
           <Route path="/Product/:id">
             <SingleProduct />

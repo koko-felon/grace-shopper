@@ -6,11 +6,14 @@ import AddToCart from "./AddToCart";
 import UpdateProduct from "./UpdateProduct";
 import { userContext } from "../context/userContext";
 import DeleteProduct from "./DeleteProduct";
+import { Card } from "react-bootstrap";
+import { cartContext } from "../context/cartContext";
 
 function SingleProduct() {
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const { userState, userDispatch } = useContext(userContext);
+  const { cartState, cartDispatch } = useContext(cartContext);
 
   console.log(id);
   console.log(userState);
@@ -29,25 +32,47 @@ function SingleProduct() {
   return (
     <>
       <Nav />
-      <div>
-        <h2>{product.productName}</h2>
-        <img src={product.image} />
-        <p>{product.productDescription}</p>
-        <p>Our Price: ${product.currentPrice}</p>
-        <p>Qty In Stock: {product.productQuantity}</p>
-        <p>MSRP: ${product.MSRP}</p>
-        <p>SKU: {product.SKU}</p>
-        <AddToCart
-          productId={product.id}
-          currentPrice={product.currentPrice}
-          setProducts={setProducts}
-        />
-        {userState.isAdmin ? (
-          <>
-            <UpdateProduct setProduct={setProduct} />
-            <DeleteProduct />
-          </>
-        ) : null}
+      <div className="singleProduct">
+        <Card style={{ width: "30rem" }}>
+          <Card.Img variant="top" src={product.image} />
+          <Card.Body class="cardbody">
+            <Card.Title class="singleprodName">
+              {" "}
+              {product.productName}
+            </Card.Title>
+            <Card.Text>
+              <p>{product.productDescription}</p>
+              <p>Our Price: ${product.currentPrice / 100}</p>
+              <p>Qty In Stock: {product.productQuantity}</p>
+              <p>MSRP: ${product.MSRP / 100}</p>
+              <p>SKU: {product.SKU}</p>
+            </Card.Text>
+            {cartState.products ? (
+              cartState.products.filter((item) => item.productId === product.id)
+                .length === 0 ? (
+                <AddToCart
+                  productId={product.id}
+                  currentPrice={product.currentPrice}
+                  setProduct={setProduct}
+                />
+              ) : (
+                <p>Added to Cart!</p>
+              )
+            ) : (
+              <AddToCart
+                productId={product.id}
+                currentPrice={product.currentPrice}
+                setProduct={setProduct}
+              />
+            )}
+            {userState.isAdmin ? (
+              <>
+                <UpdateProduct setProduct={setProduct} />
+                <DeleteProduct />
+              </>
+            ) : null}
+          </Card.Body>
+        </Card>
       </div>
       <Footer />
     </>
