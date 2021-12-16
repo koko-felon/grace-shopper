@@ -25,7 +25,7 @@ function SingleProduct() {
       setProduct(singleProduct);
     }
     getProduct();
-  }, []);
+  }, [id]);
 
   console.log(product);
 

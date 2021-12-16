@@ -71,8 +71,11 @@ function Apparel(props) {
 
   return (
     <>
-      <h2>When you feel like wearing Coco</h2>
-      <div className="productContainer">{productsToRender}</div>
+      <div className="Apparel">
+        <h2>When you feel like wearing Coco</h2>
+
+        <div className="productContainer">{productsToRender}</div>
+      </div>
     </>
   );
 }

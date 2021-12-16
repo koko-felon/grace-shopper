@@ -28,7 +28,7 @@ function ThisWeeksSteals(props) {
     return (
       <>
         <div className="Steals">
-          <Card style={{ width: "22rem" }}>
+          <Card style={{ width: "18rem" }}>
             <Card.Img variant="top" src={product.image} />
             <Card.Body>
               <Card.Title class="prodName">{product.productName}</Card.Title>
@@ -62,15 +62,6 @@ function ThisWeeksSteals(props) {
               <Link to={`/Product/${product.id}`}>View Product</Link>
             </Card.Body>
           </Card>
-          {/* <h2>Product: {product.productName}</h2>
-          <img src={product.image} />
-          <p>Description: {product.productDescription}</p>
-          <p>Price: {product.currentPrice}</p>
-          <p>Quantity: {product.productQuantity}</p>
-          <p>MSRP: {product.MSRP}</p>
-          <p>SKU: {product.SKU}</p>
-          <AddToCart />
-          <Link to={`/Product/${product.id}`}>Go to Product!</Link> */}
         </div>
       </>
     );
@@ -78,8 +69,10 @@ function ThisWeeksSteals(props) {
 
   return (
     <>
-      <h2>THIS WEEK'S STEALS!</h2>
-      <div className="productContainer">{productsToRender}</div>
+      <div className="steals">
+        <h2>THIS WEEK'S STEALS!</h2>
+        <div className="productContainer">{productsToRender}</div>
+      </div>
     </>
   );
 }

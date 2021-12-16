@@ -29,16 +29,15 @@ function Sidebar(props) {
     return (
       <>
         <div className="sidebarProducts">
-          <Card style={{ width: "auto", height: "650px" }}>
+          <Card style={{ width: "auto", height: "600px" }}>
             <Card.Img variant="top" src={product.image} />
             <Card.Body>
               <Card.Title className="prodName1">
                 {product.productName}
               </Card.Title>
               <Card.Text className="txt">
-                {/* <p>{product.productDescription}</p> */}
                 <p>Our Price: ${product.currentPrice / 100}</p>
-                {/* <p>Qty In Stock: {product.productQuantity}</p> */}
+
                 <p>MSRP: ${product.MSRP / 100}</p>
                 <p>SKU: {product.SKU}</p>
               </Card.Text>
@@ -66,21 +65,6 @@ function Sidebar(props) {
             </Card.Body>
           </Card>
         </div>
-        {/* <div className="sidebarProducts">
-          <h2>{product.productName}</h2>
-          <img src={product.image} />
-
-          <p>Our Price: ${product.currentPrice / 100}</p>
-
-          <p>MSRP: ${product.MSRP / 100}</p>
-          <p>SKU: {product.SKU}</p>
-          <AddToCart
-            productId={product.id}
-            currentPrice={product.currentPrice}
-            setProducts={setProducts}
-          />
-          <Link to={`/Product/${product.id}`}>View Product!</Link>
-        </div> */}
       </>
     );
   });
