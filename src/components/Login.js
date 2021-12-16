@@ -45,7 +45,6 @@ const Login = ({ setIsLoggedIn }) => {
 
   return (
     <>
-      <Nav />
       <div className="loginPage">
         <h2>Welcome Back Felon!</h2>
         <br />
@@ -83,8 +82,6 @@ const Login = ({ setIsLoggedIn }) => {
         </h5>
         <br />
       </div>
-
-      <Footer />
     </>
   );
 };

@@ -31,16 +31,19 @@ function SingleProduct() {
 
   return (
     <>
-      <Nav />
       <div className="singleProduct">
-        <Card style={{ width: "30rem" }}>
-          <Card.Img variant="top" src={product.image} />
-          <Card.Body class="cardbody">
+        <img
+          className="singleImg"
+          style={{ width: "21rem", height: "330px" }}
+          src={product.image}
+        />
+        <Card style={{ width: "25rem", height: "330px" }}>
+          <Card.Body>
             <Card.Title class="singleprodName">
               {" "}
               {product.productName}
             </Card.Title>
-            <Card.Text>
+            <Card.Text className="txt">
               <p>{product.productDescription}</p>
               <p>Our Price: ${product.currentPrice / 100}</p>
               <p>Qty In Stock: {product.productQuantity}</p>
@@ -74,7 +77,6 @@ function SingleProduct() {
           </Card.Body>
         </Card>
       </div>
-      <Footer />
     </>
   );
 }

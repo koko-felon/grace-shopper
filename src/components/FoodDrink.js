@@ -29,11 +29,11 @@ function FoodDrink(props) {
     return (
       <>
         <div className="FoodDrinkProducts">
-          <Card style={{ width: "18rem" }}>
+          <Card style={{ width: "18rem", height: "650px" }}>
             <Card.Img variant="top" src={product.image} />
             <Card.Body>
               <Card.Title class="prodName">{product.productName}</Card.Title>
-              <Card.Text>
+              <Card.Text className="txt">
                 <p>{product.productDescription}</p>
                 <p>Our Price: ${product.currentPrice / 100}</p>
                 <p>Qty In Stock: {product.productQuantity}</p>
@@ -81,11 +81,8 @@ function FoodDrink(props) {
 
   return (
     <>
-      <Nav />
       <h2>All you can Eat & Drink!</h2>
       <div className="productContainer">{productsToRender}</div>
-      <SideBar />
-      <Footer />
     </>
   );
 }

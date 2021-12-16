@@ -100,26 +100,28 @@ function Cart(props) {
           <div class="cartitem" key={product.productId}>
             <img id="cartItemImg" class="img-thumbnail" src={product.image} />
             <h5>{product.productName}</h5>
-            <h5>Price: ${product.currentPrice / 100}</h5>
+            <h5>${product.currentPrice / 100}</h5>
             <h5>Qty: {product.quantity}</h5>
-            <span>Update Qty</span>
+            <h5>Total: ${(product.currentPrice * product.quantity) / 100}</h5>
+
             <button
+              id="plus1"
               onClick={() =>
                 increaseQty(product.productId, product.quantity + 1)
               }
             >
               +
             </button>
+            <h6>Update Qty</h6>
             <button
+              id="minus1"
               onClick={() =>
                 decreaseQty(product.productId, product.quantity - 1)
               }
             >
               -
             </button>
-            <h5>
-              Product Total: ${(product.currentPrice * product.quantity) / 100}
-            </h5>
+
             <RemoveFromCart productId={product.productId} />
           </div>
         </>
@@ -141,9 +143,18 @@ function Cart(props) {
         <Link to="/">Continue Shopping</Link>
         <h3 className="bag">Your Shopping Bag</h3>
         <br />
+
         {products ? products : <span>Nothing in your bag!</span>}
-        <h3 className="total">Order Total: ${total / 100}</h3>
+
+        <h5 className="tax">
+          Sales Tax (9%): ${((total / 100) * 0.09).toFixed(2)}
+        </h5>
+        <h3 className="total">
+          Order Total: ${((total / 100) * 1.09).toFixed(2)}
+        </h3>
+
         <br />
+
         <Link to="/Checkout">Proceed to CHECKOUT</Link>
       </div>
     </>

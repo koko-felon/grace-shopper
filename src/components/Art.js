@@ -70,11 +70,10 @@ function Art(props) {
 
   return (
     <>
-      <Nav />
-      <h2>Feeling Artsy?</h2>
-      <div className="productContainer">{productsToRender}</div>
-      <SideBar />
-      <Footer />
+      <div className="Art">
+        <h2>Feeling Artsy?</h2>
+        <div className="productContainer">{productsToRender}</div>
+      </div>
     </>
   );
 }

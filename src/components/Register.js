@@ -65,7 +65,6 @@ const Register = ({ setIsLoggedIn }) => {
 
   return (
     <>
-      <Nav />
       <div className="register">
         <h2>Create an account</h2>
         <br />
@@ -154,7 +153,6 @@ const Register = ({ setIsLoggedIn }) => {
         </h5>
         <br />
       </div>
-      <Footer />
     </>
   );
 };

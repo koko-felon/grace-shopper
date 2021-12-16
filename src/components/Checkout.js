@@ -5,8 +5,8 @@ function Checkout(props) {
   return (
     <>
       <div className="Checkout">
-        <h4>OOPS, not quite yet! </h4>
-        <Link to="/">Continue Shopping</Link>
+        <h5>OOPS, not ready to checkout yet! </h5>
+        <Link to="/">Back to Shopping</Link>
         <br />
         <br />
         <h4>Pay with Card</h4>

@@ -78,10 +78,8 @@ function ThisWeeksSteals(props) {
 
   return (
     <>
-      <Nav />
       <h2>THIS WEEK'S STEALS!</h2>
       <div className="productContainer">{productsToRender}</div>
-      <Footer />
     </>
   );
 }
