@@ -99,10 +99,10 @@ function Cart(props) {
         <>
           <div class="cartitem" key={product.productId}>
             <img id="cartItemImg" class="img-thumbnail" src={product.image} />
-            <h5>{product.productName}</h5>
-            <h5>${product.currentPrice / 100}</h5>
-            <h5>Qty: {product.quantity}</h5>
-            <h5>Total: ${(product.currentPrice * product.quantity) / 100}</h5>
+            <h6>{product.productName}</h6>
+            <h6>${product.currentPrice / 100}</h6>
+            <h6>Qty: {product.quantity}</h6>
+            <h6>Total: ${(product.currentPrice * product.quantity) / 100}</h6>
 
             <button
               id="plus1"

@@ -8,6 +8,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Permanent+Marker&display=swap");
 
 body {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+body {
   min-height: 100vh;
   max-width: 100%;
   margin: 0 auto;
@@ -20,8 +39,7 @@ body {
   flex-direction: column;
 }
 
-.homeFlex,
-.Art {
+.homeFlex {
   display: flex;
   flex-direction: row;
 }
@@ -30,16 +48,12 @@ body {
   display: block;
 }
 
-.singleImg {
-  float: left;
+.Art,
+.singleProduct {
   display: flex;
-  position: fixed;
-  left: 0;
-  right: 0;
-  margin-left: 15%;
-  margin-top: 21px;
-  overflow: auto;
-  border-radius: 4px;
+  flex-direction: column;
+  margin-left: 85px;
+  /* justify-content: space-evenly; */
 }
 
 img {
@@ -49,52 +63,6 @@ img {
   /* object-fit: cover; */
 }
 
-/* .anim {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-
-  &:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    z-index: 1;
-    background-color: black;
-    animation: showText 0.8s ease;
-  }
-
-  h1 {
-    opacity: 0;
-    animation: animateText 0.7s forwards;
-  }
-}
-
-@keyframes animateText {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes showText {
-  0% {
-    width: 0;
-    left: 0;
-  }
-  50% {
-    width: 100%;
-    left: 0;
-  }
-  100% {
-    width: 0;
-    left: 0;
-  }
-} */
-
 #header {
   font-family: "Permanent Marker", cursive !important;
   text-decoration: none;
@@ -103,15 +71,15 @@ img {
 .navbar {
   display: block;
   text-align: center;
-  background: linear-gradient(to bottom, #9bbdce 0, #100f24 100%);
+
   position: sticky;
   left: 0;
   right: 0;
 }
 
 .sidebarContainer {
-  background-color: #000000;
-
+  border: 3px solid black;
+  border-radius: 10px;
   text-align: center;
   padding: 5px;
   display: flex;
@@ -131,19 +99,19 @@ img {
 }
 
 .loginPage,
-.register,
-.singleProduct {
+.register {
   display: block;
   text-align: center;
   position: relative;
   margin: 50px auto;
 }
 
-.singleProduct {
+/* .singleProduct {
   margin-left: 50%;
   /* height: 150px; */
-  margin-top: 2px;
-}
+/* margin-top: 2px;
+  justify-content: center;
+} */
 
 .singleprodName {
   font-family: "Permanent Marker", cursive !important;
@@ -151,13 +119,29 @@ img {
 }
 
 .loginPage input,
-.register input {
+.register input,
+.editProduct input {
   margin-bottom: 15px;
   font-size: 18px;
   width: 300px;
   height: 30px;
   text-align: center;
   border: 1px solid rgb(37, 122, 156);
+}
+
+.editProduct {
+  margin: 5%;
+
+  width: 500px;
+  background: rgb(235, 242, 245);
+  box-shadow: 0 5px 10px 0 rgb(0 0 0 / 80%);
+  color: black;
+  word-break: break-word;
+  margin-top: 100px;
+  padding-left: 20px;
+  overflow: hidden;
+  border-radius: 10px;
+  padding-bottom: 10px;
 }
 
 #minus1 {
@@ -245,12 +229,12 @@ h2 {
 .productContainer {
   display: flex;
   width: auto;
-
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .cart {
+  margin: 5%;
   position: relative;
   width: 75%;
   background: rgb(235, 242, 245);
@@ -269,11 +253,18 @@ h2 {
 
   justify-content: space-between;
   align-items: center;
-  margin: 0 50px;
+  margin: 0 15px;
   margin-bottom: 20px;
   border: 1px solid black;
   padding: 18px;
   border-radius: 5px;
+}
+
+.Steals,
+.FoodDrink,
+.Apparel,
+.Art {
+  margin: 30px;
 }
 
 #cartItemImg {

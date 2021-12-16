@@ -35,51 +35,70 @@ function UpdateProduct({ setProduct }) {
   }
 
   return (
-    <div>
-      <h1>Edit Product!</h1>
-      <form onSubmit={editProduct}>
-        <input
-          value={productName}
-          placeholder="Product Name"
-          onChange={(e) => {
-            setProductName(e.target.value);
-          }}
-        />
-        <input
-          value={productDescription}
-          placeholder="Product Desc."
-          onChange={(e) => {
-            setProductDescription(e.target.value);
-          }}
-        />
-        <input
-          value={currentPrice}
-          placeholder="Current Price"
-          onChange={(e) => {
-            setCurrentPrice(e.target.value);
-          }}
-        />
-        <input
-          value={productQuantity}
-          placeholder="Product Quantity"
-          onChange={(e) => {
-            setProductQuantity(e.target.value);
-          }}
-        />
-        <input
-          value={MSRP}
-          placeholder="MSRP"
-          onChange={(e) => {
-            setMSRP(e.target.value);
-          }}
-        />
-        <input
-          value={SKU}
-          placeholder="SKU"
-          onChange={(e) => {
-            setSKU(e.target.value);
-          }}
-        />
+    <div className="editProduct">
+      <h2>Edit Product!</h2>
+      <br />
+      <form className="editForm" onSubmit={editProduct}>
+        <label>
+          <input
+            value={productName}
+            placeholder="Product Name"
+            onChange={(e) => {
+              setProductName(e.target.value);
+            }}
+          />
+        </label>
+        <br />
+        <label>
+          <input
+            value={productDescription}
+            placeholder="Product Desc."
+            onChange={(e) => {
+              setProductDescription(e.target.value);
+            }}
+          />
+        </label>
+        <br />
+        <label>
+          <input
+            value={currentPrice}
+            placeholder="Current Price"
+            onChange={(e) => {
+              setCurrentPrice(e.target.value);
+            }}
+          />
+        </label>
+        <br />
+        <label>
+          <input
+            value={productQuantity}
+            placeholder="Product Quantity"
+            onChange={(e) => {
+              setProductQuantity(e.target.value);
+            }}
+          />
+        </label>
+        <br />
+        <label>
+          <input
+            value={MSRP}
+            placeholder="MSRP"
+            onChange={(e) => {
+              setMSRP(e.target.value);
+            }}
+          />
+        </label>
+        <br />
+        <label>
+          <input
+            value={SKU}
+            placeholder="SKU"
+            onChange={(e) => {
+              setSKU(e.target.value);
+            }}
+          />
+        </label>
+        <br />
         <button type="submit">Edit Product!</button>
       </form>
     </div>

@@ -63,17 +63,6 @@ function FoodDrink(props) {
               <Link to={`/Product/${product.id}`}>View Product</Link>
             </Card.Body>
           </Card>
-          {/* <div> */}
-          {/* <h2>{product.productName}</h2> */}
-          {/*I know Image is not <p> just for testing purposes*/}
-          {/* <img src={product.image} />
-          <p>{product.productDescription}</p>
-          <p>Our Price: ${product.currentPrice}</p>
-          <p>Qty In Stock: {product.productQuantity}</p>
-          <p>MSRP: ${product.MSRP}</p>
-          <p>SKU: {product.SKU}</p>
-          <AddToCart productId={product.id} />
-          <Link to={`/Product/${product.id}`}>Go to Product!</Link> */}
         </div>
       </>
     );
@@ -81,8 +70,10 @@ function FoodDrink(props) {
 
   return (
     <>
-      <h2>All you can Eat & Drink!</h2>
-      <div className="productContainer">{productsToRender}</div>
+      <div className="FoodDrink">
+        <h2>All you can Eat & Drink!</h2>
+        <div className="productContainer">{productsToRender}</div>
+      </div>
     </>
   );
 }

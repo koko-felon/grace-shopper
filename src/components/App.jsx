@@ -44,13 +44,13 @@ const App = () => {
           <Route path="/ThisWeeksSteals">
             <ThisWeeksSteals />
           </Route>
-          <Route className="Art" path="/Art">
+          <Route  path="/Art">
             <Art />
           </Route>
           <Route path="/FoodDrink">
             <FoodDrink />
           </Route>
-          <Route path="/Apparel">
+          <Route  path="/Apparel">
             <Apparel />
           </Route>
           <Route path="/Checkout">
