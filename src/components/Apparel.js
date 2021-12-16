@@ -30,11 +30,11 @@ function Apparel(props) {
     return (
       <>
         <div className="apparelProducts">
-          <Card style={{ width: "18rem" }}>
+          <Card style={{ width: "20rem", height: "690px" }}>
             <Card.Img variant="top" src={product.image} />
-            <Card.Body class="cardbody">
+            <Card.Body>
               <Card.Title class="prodName">{product.productName}</Card.Title>
-              <Card.Text>
+              <Card.Text className="txt">
                 <p>{product.productDescription}</p>
                 <p>Our Price: ${product.currentPrice / 100}</p>
                 <p>Qty In Stock: {product.productQuantity}</p>
@@ -71,12 +71,8 @@ function Apparel(props) {
 
   return (
     <>
-      <Nav />
-
       <h2>When you feel like wearing Coco</h2>
       <div className="productContainer">{productsToRender}</div>
-      <SideBar />
-      <Footer />
     </>
   );
 }

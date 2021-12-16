@@ -18,16 +18,12 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 import { CartProvider } from "../context/cartContext";
 import Products from "./Products";
 import "./styles.css";
+import Cart from "./Cart";
 
 function Nav() {
   const { userState, userDispatch } = useContext(userContext);
   const { cartState, cartDispatch } = useContext(cartContext);
   const token = localStorage.getItem("token");
-  // const {
-  //   state: { cart },
-  //   dispatch,
-  //   productDispatch,
-  // } = CartProvider();
 
   const logout = () => {
     localStorage.clear("token");
@@ -39,13 +35,24 @@ function Nav() {
     <Navbar style={{ height: 120 }}>
       <Container>
         <div className="anim">
+          {/* <img className="koko" src="/src/image/koko-felon-logo.png" alt="" /> */}
           <Link id="header" class="text-white" to="/">
             <h1>Coco Felons</h1>
           </Link>
         </div>
+        <Link id="categoryNav" class="text-white grow" to="/Art">
+          Art
+        </Link>
+        <Link id="categoryNav" class="text-white grow" to="/FoodDrink">
+          Food & Drink
+        </Link>
+        <Link id="categoryNav" class="text-white grow" to="/Apparel">
+          Apparel
+        </Link>
+
         <Navbar.Text className="search">
           <FormControl
-            style={{ width: 200 }}
+            style={{ width: 200, height: 23 }}
             type="search"
             placeholder="Search the goods"
             className="m-auto"
@@ -77,21 +84,11 @@ function Nav() {
             )}
             <Link to="/Cart"></Link>
           </div>
-
-          <Link id="categoryNav" class="text-white" to="/Art">
-            Art
-          </Link>
-          <Link id="categoryNav" class="text-white" to="/FoodDrink">
-            Food & Drink
-          </Link>
-          <Link id="categoryNav" class="text-white" to="/Apparel">
-            Apparel
-          </Link>
         </div>
 
         <Link to="/cart">
           <HiOutlineShoppingBag alignright="true" color="white" size="40px" />
-          {/* <Badge class="text-white">{Products.length}</Badge> */}
+          {/* <Badge class="text-white">{cartState.products.length}</Badge> */}
         </Link>
       </Container>
     </Navbar>

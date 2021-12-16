@@ -6,7 +6,7 @@ import { cartContext } from "../context/cartContext";
 import { userContext } from "../context/userContext";
 import "./styles.css";
 
-function Sidebar() {
+function Sidebar(props) {
   const [products, setProducts] = useState([]);
   const { cartState, cartDispatch } = useContext(cartContext);
   const { userState, userDispatch } = useContext(userContext);
@@ -29,15 +29,16 @@ function Sidebar() {
     return (
       <>
         <div className="sidebarProducts">
-          <Card style={{ width: "auto" }}>
+          <Card style={{ width: "auto", height: "650px" }}>
             <Card.Img variant="top" src={product.image} />
             <Card.Body>
-              <Card.Title className="prodName1" class="text-white">
+              <Card.Title className="prodName1">
                 {product.productName}
               </Card.Title>
-              <Card.Text>
-                <p>${product.currentPrice / 100}</p>
-
+              <Card.Text className="txt">
+                {/* <p>{product.productDescription}</p> */}
+                <p>Our Price: ${product.currentPrice / 100}</p>
+                {/* <p>Qty In Stock: {product.productQuantity}</p> */}
                 <p>MSRP: ${product.MSRP / 100}</p>
                 <p>SKU: {product.SKU}</p>
               </Card.Text>
@@ -88,8 +89,9 @@ function Sidebar() {
     <>
       <div className="sidebarContainer">
         <span className="stealsLink">
-          <Link to="/ThisWeeksSteals">
-            This Week's Steals! Get em while they're hot!
+          <Link class="text-white" to="/ThisWeeksSteals">
+            This Week's Steals!
+            <br /> Get em while they're hot!
           </Link>
 
           <div className="productContainer">{productsToRender}</div>

@@ -32,7 +32,9 @@ function RemoveFromCart({ productId }) {
 
   return (
     <div>
-      <button onClick={handleSubmit}>Remove from Cart!</button>
+      <button id="removeCart" onClick={handleSubmit}>
+        Remove from Cart!
+      </button>
     </div>
   );
 }

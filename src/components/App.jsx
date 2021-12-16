@@ -5,9 +5,10 @@ import Login from "./Login";
 import Register from "./Register";
 import Home from "./Home";
 import ThisWeeksSteals from "./ThisWeeksSteals";
-
+import Footer from "./Footer";
 import Cart from "./Cart";
-
+import Nav from "./Nav";
+import Sidebar from "./SideBar";
 import Art from "./Art";
 import FoodDrink from "./FoodDrink";
 import Apparel from "./Apparel";
@@ -22,8 +23,11 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
+    <Router>
     <div className="App">
-      <Router>
+      <Nav />
+      <div className="homeFlex">
+     <Sidebar />
         <Switch>
           <Route exact path="/">
             <Home />
@@ -40,7 +44,7 @@ const App = () => {
           <Route path="/ThisWeeksSteals">
             <ThisWeeksSteals />
           </Route>
-          <Route path="/Art">
+          <Route className="Art" path="/Art">
             <Art />
           </Route>
           <Route path="/FoodDrink">
@@ -56,8 +60,11 @@ const App = () => {
             <SingleProduct />
           </Route>
         </Switch>
-      </Router>
+      
+      </div>
+      <Footer />
     </div>
+    </Router>
   );
 };
 

@@ -50,10 +50,7 @@ function Home(props) {
   return (
     <>
       <div className="home">
-        <Nav />
         <Products />
-        <SideBar />
-        <Footer />
       </div>
     </>
   );
