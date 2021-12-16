@@ -21,9 +21,7 @@ function DeleteProduct(props) {
   }
   return (
     <div>
-      <button id="deleteProd" onClick={deleteProduct}>
-        Delete Product!
-      </button>
+      <button onClick={deleteProduct}>Delete Product!</button>
     </div>
   );
 }
